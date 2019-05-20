@@ -20,6 +20,9 @@ public class Collegue {
 
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
     private List<RoleCollegue> roles;
+    
+    @OneToMany(mappedBy = "annonceur")
+    private List<Annonce> annonces;
 
     public Long getId() {
         return id;
@@ -68,4 +71,13 @@ public class Collegue {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+	public List<Annonce> getAnnonces() {
+		return annonces;
+	}
+
+	public void setAnnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
+	}
+    
 }
