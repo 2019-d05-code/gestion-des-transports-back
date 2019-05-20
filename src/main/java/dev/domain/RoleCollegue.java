@@ -3,6 +3,7 @@ package dev.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Role collegue")
 public class RoleCollegue {
 
     @Id
@@ -12,7 +13,6 @@ public class RoleCollegue {
     @ManyToOne
     @JoinColumn(name = "collegue_id")
     private Collegue collegue;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 

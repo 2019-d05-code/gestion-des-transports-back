@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="Collegue")
 public class Collegue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "nom")
     private String nom;
-
+    @Column(name = "prenom")
     private String prenom;
-
+    @Column(name = "email")
     private String email;
-
+    @Column(name = "motDePasse")
     private String motDePasse;
-
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
     private List<RoleCollegue> roles;
 
