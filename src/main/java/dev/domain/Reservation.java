@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Reservation")
 public class Reservation {
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,35 +22,43 @@ public class Reservation {
 	private LocalDateTime dateDeReservation; 
 	@Column(name = "dateDeRetour")
 	private LocalDateTime dateDeRetour; 
-	@Column(name = "photoUrl")
-	private String photoUrl; 
-	@Column(name = "immatriculation")
-	private String immatriculation; 
-	@Column(name = "marque")
-	private String marque; 
-	@Column(name = "modele")
-	private String modele; 
-	@Column(name = "categorie")
-	private String categorie;
+
 	
+	@ManyToOne 
+	@JoinColumn(name = "id_vehicule")
+	private Vehicule uneVoiture; 
+
 	public Reservation() {
 		super();	
 	}
 
-	public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, String photoUrl,
+	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, String photoUrl,
 			String immatriculation, String marque, String modele, String categorie) {
 		super();
-		this.id = id;
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
-		this.photoUrl = photoUrl;
-		this.immatriculation = immatriculation;
-		this.marque = marque;
-		this.modele = modele;
-		this.categorie = categorie;
+		
 	}
 	
 	
+	
+
+	
+	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
+		super();
+		this.dateDeReservation = dateDeReservation;
+		this.dateDeRetour = dateDeRetour;
+		this.uneVoiture = uneVoiture;
+	}
+
+	public Vehicule getUneVoiture() {
+		return uneVoiture;
+	}
+
+	public void setUneVoiture(Vehicule uneVoiture) {
+		this.uneVoiture = uneVoiture;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -66,40 +77,7 @@ public class Reservation {
 	public void setDateDeRetour(LocalDateTime dateDeRetour) {
 		this.dateDeRetour = dateDeRetour;
 	}
-	public String getPhotoUrl() {
-		return photoUrl;
-	}
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
-	}
-	public String getImmatriculation() {
-		return immatriculation;
-	}
-	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation;
-	}
-	public String getMarque() {
-		return marque;
-	}
-	public void setMarque(String marque) {
-		this.marque = marque;
-	}
-	public String getModele() {
-		return modele;
-	}
-	public void setModele(String modele) {
-		this.modele = modele;
-	}
-	public String getCategorie() {
-		return categorie;
-	}
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
-	} 
-	
-	
-	
-	
+
 	
 
 }
