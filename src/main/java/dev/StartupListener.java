@@ -4,6 +4,7 @@ import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.Vehicule;
+import dev.domain.Vehicule.Categorie;
 import dev.domain.Version;
 import dev.repository.CollegueRepo;
 import dev.repository.VehiculeRepo;
@@ -59,8 +60,8 @@ public class StartupListener {
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
         
-        Vehicule auto1 = new Vehicule("Opel", "kadettE", "Berlines Taille S", "JS-123-GH", "https://static3.car.gr/14598250_0_z.jpg");
-        Vehicule auto2 = new Vehicule("Peugeot", "806", "Berlines Taille L", "CR-456-UU", "https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg");
+        Vehicule auto1 = new Vehicule("Opel", "kadettE", Categorie.BERLINES_TAILLE_S, "JS-123-GH", "https://static3.car.gr/14598250_0_z.jpg");
+        Vehicule auto2 = new Vehicule("Peugeot", "806", Categorie.BERLINES_TAILLE_L, "CR-456-UU", "https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg");
         
         this.vehiculeRepo.save(auto1);
         this.vehiculeRepo.save(auto2);
