@@ -75,6 +75,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // toutes les requêtes doivent être authentifiées
                 .authorizeRequests().anyRequest().authenticated()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().disable()
                 .and()
                 // génération d'un formulaire de login
                 // il faut produire une requête avec les caractéristiques suivantes :

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.Annonce;
+import dev.service.AnnonceService;
 import dev.service.CollegueService;
 
 @RestController
@@ -18,10 +19,12 @@ public class CollegueController {
 
 	@Autowired
 	private CollegueService collegueService;
+	@Autowired
+	private AnnonceService annonceService;
 
 	@PostMapping("/annonces/creer")
 	public ResponseEntity<?> creerAnnonce(@RequestBody Annonce annonce) {
-		collegueService.creerAnnonce(annonce);
+		annonceService.creerAnnonce(annonce);
 		return ResponseEntity.ok().build();
 	}
 

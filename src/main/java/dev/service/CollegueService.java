@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.AnnonceDto;
 import dev.domain.Annonce;
 import dev.domain.Collegue;
 import dev.repository.CollegueRepo;
@@ -21,20 +22,21 @@ public class CollegueService {
 	public CollegueService() {
 	}
 	
-	@Transactional
+	public CollegueService(CollegueRepo collegueRepo) {
+	this.collegueRepo = collegueRepo;
+	}
+
 	public void sauvegarderCollegue(Collegue collegue) {
 		collegueRepo.save(collegue);
 	}
 
 	@Transactional
-	public void creerAnnonce(Annonce annonce) {
-		Collegue annonceur = collegueRepo.findById(annonce.getAnnonceur().getId())
+	public void sauvegarderAnnonce(AnnonceDto annonceDto) {
+		
+		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceurId())
 				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
-		List<Annonce> annonces = annonceur.getAnnonces();
-		annonces.add(annonce);
-		annonceur.setAnnnonces(annonces);
+		Annonce annonce = annonceDto.dtoToObject(annonceur);
+		
 	}
-	
-	
 
 }
