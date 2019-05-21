@@ -32,6 +32,11 @@ public class CollegueService {
 	public CollegueVM modifierRole(long matricule) {
 		Collegue collegue = rechercherParMatricule(matricule);
 		List<RoleCollegue> roles = collegue.getRoles();
+		for (RoleCollegue role : roles) {
+			if (role.getRole().equals(Role.ROLE_CHAUFFEUR)) {
+				throw 
+			}
+		}
 		roles.add(new RoleCollegue(collegue, Role.ROLE_CHAUFFEUR));
 		collegue.setRoles(roles);
 		CollegueVM collegueVM = new CollegueVM(collegue);
