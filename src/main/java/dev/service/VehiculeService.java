@@ -20,15 +20,26 @@ public class VehiculeService {
 	public List<Vehicule> listerVehicules() throws EmptyRepositoryException {
 		
 		List<Vehicule> resultat = new ArrayList<>();
+		List<Vehicule> vehiculeTrouve = repo.findAll();
 		
-		if(repo.findAll().isEmpty() || repo.findAll() == null) {
+		if(vehiculeTrouve.isEmpty() || vehiculeTrouve == null) {
 			throw new EmptyRepositoryException("Il n'y a aucun véhicule enregistré dans la base de données");
 		}else {
-			for(Vehicule vehicule:repo.findAll()) {
+			for(Vehicule vehicule:vehiculeTrouve) {
 				resultat.add(vehicule);
 			}
 			return resultat;
 		}
+		
+	}
+	
+	
+//cette méthodes me permet de récupérer toutes les infos des véhicules
+	public List<Vehicule> listerLes() throws RuntimeException {
+		
+		 List<Vehicule> veh = repo.findAll();
+		
+		 return veh; 
 		
 	}
 	

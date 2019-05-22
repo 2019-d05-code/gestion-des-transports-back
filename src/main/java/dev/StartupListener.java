@@ -1,6 +1,7 @@
 package dev;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import dev.domain.Collegue;
+import dev.domain.Reservation;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.Vehicule;
@@ -32,13 +34,15 @@ public class StartupListener {
     private PasswordEncoder passwordEncoder;
     private CollegueRepo collegueRepo;
     private VehiculeRepo vehiculeRepo;
+    private ReservationRepository reservationRepo; 
 
-	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo, ReservationRepository repo) {
+	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo, ReservationRepository reservationRepo) {
         this.appVersion = appVersion;
         this.versionRepo = versionRepo;
         this.passwordEncoder = passwordEncoder;
         this.collegueRepo = collegueRepo;
         this.vehiculeRepo = vehiculeRepo;
+        this.reservationRepo=reservationRepo;
     }
 
     @EventListener(ContextRefreshedEvent.class)
@@ -66,9 +70,11 @@ public class StartupListener {
         Vehicule auto1 = new Vehicule("Opel", "kadettE", Categorie.BERLINES_TAILLE_S, "JS-123-GH", "https://static3.car.gr/14598250_0_z.jpg", 4);
         Vehicule auto2 = new Vehicule("Peugeot", "806", Categorie.BERLINES_TAILLE_L, "CR-456-UU", "https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7);
         
+        //Reservation uneReservation = new Reservation(auto1, LocalDateTime.now(), LocalDateTime.now()); 
+        
         this.vehiculeRepo.save(auto1);
         this.vehiculeRepo.save(auto2);
-        
-}
+       // this.reservationRepo.save(uneReservation); 
 
+    }
 }

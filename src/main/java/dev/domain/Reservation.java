@@ -22,11 +22,13 @@ public class Reservation {
 	private LocalDateTime dateDeReservation; 
 	@Column(name = "dateDeRetour")
 	private LocalDateTime dateDeRetour; 
-
+	
 	
 	@ManyToOne 
 	@JoinColumn(name = "id_vehicule")
 	private Vehicule uneVoiture; 
+	
+	
 
 	public Reservation() {
 		super();	
@@ -37,14 +39,10 @@ public class Reservation {
 		super();
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
-		
 	}
-	
-	
-	
 
-	
-	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
+
+public Reservation(Vehicule uneVoiture, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour) {
 		super();
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;

@@ -36,7 +36,7 @@ public class Vehicule {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	private String marque;
 	private String modele;
 	@Enumerated(EnumType.STRING)
@@ -48,7 +48,7 @@ public class Vehicule {
 	@OneToMany(mappedBy = "uneVoiture")
 	List<Reservation> listeDeReservations; 
 	
-	public Vehicule(Integer id) {
+	public Vehicule(int id) {
 		super();
 		this.id = id;
 	}
@@ -92,11 +92,11 @@ public class Vehicule {
 		this.nbPlaces = nbPlaces;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
