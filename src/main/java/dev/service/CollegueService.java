@@ -35,7 +35,7 @@ public class CollegueService {
 		
 		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceurId())
 				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
-		Annonce annonce = annonceDto.dtoToObject(annonceur);
+		Annonce annonce = annonceDto.dtoToObject();
 		
 	}
 

@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.AnnonceDto;
 import dev.domain.Annonce;
 import dev.domain.Collegue;
+import dev.domain.Vehicule;
+import dev.exception.EmptyRepositoryException;
 import dev.repository.AnnonceRepo;
 import dev.repository.CollegueRepo;
+import dev.repository.VehiculeRepo;
 
 @Service
 public class AnnonceService {
@@ -20,6 +24,8 @@ public class AnnonceService {
 	AnnonceRepo annonceRepo;
 	@Autowired
 	CollegueRepo collegueRepo;
+	@Autowired
+	VehiculeRepo vehiculeRepo;
 
 	public AnnonceService() {
 	}
@@ -30,15 +36,20 @@ public class AnnonceService {
 	}
 
 	@Transactional
-	public Annonce creerAnnonce(Annonce annonce) {
-		Long idAnnonceur = annonce.getAnnonceur().getId();
-		Collegue annonceur = collegueRepo.findById(idAnnonceur).orElseThrow(() -> new UsernameNotFoundException(
-				"L'annonceur n°" + idAnnonceur + " n'a pas été retrouvé"));
+	public AnnonceDto creerAnnonce(AnnonceDto dto) throws EmptyRepositoryException {
+		Long idAnnonceur = dto.getAnnonceurId();
+		Collegue annonceur = collegueRepo.findById(idAnnonceur)
+				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
+		Annonce annonceCree = new Annonce(idAnnonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
+				dto.getDateTimeDepart(), dto.getPlace());
+		annonceRepo.save(annonceCree);
 		List<Annonce> annonces = annonceur.getAnnonces();
-		annonces.add(annonce);
+		annonces.add(annonceCree);
 		annonceur.setAnnnonces(annonces);
-		annonce.setAnnonceur(annonceur);
-		return annonceRepo.save(annonce);
+
+		// TODO: quand géolocalisation fonctionnelle => annonce et dto renvoyée
+		// devront être valorisés (distance, durée)
+		return dto;
 	}
 
 }
