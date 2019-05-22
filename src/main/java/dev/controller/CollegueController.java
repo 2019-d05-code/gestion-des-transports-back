@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.controller.vm.CollegueVM;
+import dev.controller.dto.CollegueDTO;
 import dev.service.CollegueService;
 
 @RestController
@@ -21,12 +21,12 @@ public class CollegueController {
 
 	@PatchMapping(value = "ajoutChauffeur/{matricule}")
 	public ResponseEntity<Object> ajoutChauffeur(@PathVariable long matricule) {
-		CollegueVM collegueVM = collegueService.modifierRole(matricule);
-		return ResponseEntity.status(HttpStatus.OK).body(collegueVM);
+		CollegueDTO collegueDTO = collegueService.modifierRole(matricule);
+		return ResponseEntity.status(HttpStatus.OK).body(collegueDTO);
 	}
 
 	@GetMapping(value = "/chauffeur")
-	public List<CollegueVM> recupChauffeur() {
+	public List<CollegueDTO> recupChauffeur() {
 		return collegueService.recupColleChauffeur();
 	}
 

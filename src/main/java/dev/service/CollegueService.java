@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.controller.vm.CollegueVM;
+import dev.controller.dto.CollegueDTO;
 import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
+import dev.exception.CollegueDejaChauffeurException;
 import dev.exception.CollegueNonTrouveException;
 import dev.repository.CollegueRepo;
 
@@ -29,28 +30,28 @@ public class CollegueService {
 	}
 
 	@Transactional
-	public CollegueVM modifierRole(long matricule) {
+	public CollegueDTO modifierRole(long matricule) throws CollegueDejaChauffeurException {
 		Collegue collegue = rechercherParMatricule(matricule);
 		List<RoleCollegue> roles = collegue.getRoles();
 		for (RoleCollegue role : roles) {
 			if (role.getRole().equals(Role.ROLE_CHAUFFEUR)) {
-				throw 
+				throw new CollegueDejaChauffeurException();
 			}
 		}
 		roles.add(new RoleCollegue(collegue, Role.ROLE_CHAUFFEUR));
 		collegue.setRoles(roles);
-		CollegueVM collegueVM = new CollegueVM(collegue);
-		return collegueVM;
+		CollegueDTO collegueDTO = new CollegueDTO(collegue);
+		return collegueDTO;
 	}
 
-	public List<CollegueVM> recupColleChauffeur() {
-		List<CollegueVM> listChauffeur = new ArrayList<>();
+	public List<CollegueDTO> recupColleChauffeur() {
+		List<CollegueDTO> listChauffeur = new ArrayList<>();
 		List<Collegue> listCollegue = collegueRepo.findAll();
 		for (Collegue coll : listCollegue) {
 			for (RoleCollegue role : coll.getRoles()) {
 				if (role.getRole().equals(Role.ROLE_CHAUFFEUR)) {
-					CollegueVM collegueVM = new CollegueVM(coll);
-					listChauffeur.add(collegueVM);
+					CollegueDTO collegueDTO = new CollegueDTO(coll);
+					listChauffeur.add(collegueDTO);
 				}
 			}
 		}

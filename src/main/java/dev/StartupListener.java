@@ -44,6 +44,8 @@ public class StartupListener {
 		col1.setNom("Admin");
 		col1.setPrenom("DEV");
 		col1.setEmail("admin@dev.fr");
+		col1.setPermis("16546FEFGGG155");
+		col1.setTelephone("0645582546");
 		col1.setMotDePasse(passwordEncoder.encode("superpass"));
 		col1.setRoles(Arrays.asList(new RoleCollegue(col1, Role.ROLE_ADMINISTRATEUR),
 				new RoleCollegue(col1, Role.ROLE_UTILISATEUR)));

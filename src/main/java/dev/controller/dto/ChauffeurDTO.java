@@ -1,4 +1,4 @@
-package dev.controller.vm;
+package dev.controller.dto;
 
 /**
  * @author rmy17
@@ -6,7 +6,7 @@ package dev.controller.vm;
  *         DTO pour chauffeur
  */
 
-public class ChauffeurVM {
+public class ChauffeurDTO {
 
 	private long matricule;
 	private String nom;

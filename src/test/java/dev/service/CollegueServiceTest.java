@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dev.controller.vm.ChauffeurVM;
+import dev.controller.dto.ChauffeurDTO;
 import dev.domain.Collegue;
 import dev.exception.CollegueNonTrouveException;
 import dev.repository.CollegueRepo;
@@ -16,7 +16,7 @@ public class CollegueServiceTest {
 	CollegueRepo mockedRepo = Mockito.mock(CollegueRepo.class);
 	private static final Logger LOG = LoggerFactory.getLogger(CollegueService.class);
 	private Collegue collegue = new Collegue();
-	private ChauffeurVM chauffeurVM = new ChauffeurVM();
+	private ChauffeurDTO chauffeurVM = new ChauffeurDTO();
 	CollegueService collegueService;
 
 	@Before
