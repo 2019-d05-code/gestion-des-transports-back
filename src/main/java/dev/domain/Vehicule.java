@@ -40,26 +40,20 @@ public class Vehicule {
 	private Categorie categorie;
 	private String immatriculation;
 	private String photoUrl;
+	private Integer nbPlaces;
 	
 	
-	public Vehicule() {}
+	public Vehicule() { }
 	
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.categorie = categorie;
-		this.immatriculation = immatriculation;
-	}
 
-
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation, String photoUrl) {
+	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation, String photoUrl, Integer nbPlaces) {
 		super();
-		this.marque = marque;
-		this.modele = modele;
+		this.marque = marque.toUpperCase();
+		this.modele = modele.toLowerCase();
 		this.categorie = categorie;
-		this.immatriculation = immatriculation;
+		this.immatriculation = immatriculation.toUpperCase();
 		this.photoUrl = photoUrl;
+		this.nbPlaces = nbPlaces;
 	}
 
 	public Integer getId() {
@@ -75,7 +69,7 @@ public class Vehicule {
 	}
 
 	public void setMarque(String marque) {
-		this.marque = marque;
+		this.marque = marque.toUpperCase();
 	}
 
 	public String getModele() {
@@ -83,11 +77,11 @@ public class Vehicule {
 	}
 
 	public void setModele(String modele) {
-		this.modele = modele;
+		this.modele = modele.toLowerCase();
 	}
 
-	public Categorie getCategorie() {
-		return categorie;
+	public String getCategorie() {
+		return categorie.toString();
 	}
 
 	public void setCategorie(Categorie categorie) {
@@ -99,7 +93,7 @@ public class Vehicule {
 	}
 
 	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation;
+		this.immatriculation = immatriculation.toUpperCase();
 	}
 
 	public String getPhotoUrl() {
@@ -108,6 +102,14 @@ public class Vehicule {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+
+	public Integer getNbPlaces() {
+		return nbPlaces;
+	}
+
+	public void setNbPlaces(Integer nbPlaces) {
+		this.nbPlaces = nbPlaces;
 	}
 
 	

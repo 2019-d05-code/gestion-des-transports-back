@@ -60,8 +60,8 @@ public class StartupListener {
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
         
-        Vehicule auto1 = new Vehicule("Opel", "kadettE", Categorie.BERLINES_TAILLE_S, "JS-123-GH", "https://static3.car.gr/14598250_0_z.jpg");
-        Vehicule auto2 = new Vehicule("Peugeot", "806", Categorie.BERLINES_TAILLE_L, "CR-456-UU", "https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg");
+        Vehicule auto1 = new Vehicule("Opel", "kadettE", Categorie.BERLINES_TAILLE_S, "JS-123-GH", "https://static3.car.gr/14598250_0_z.jpg", 4);
+        Vehicule auto2 = new Vehicule("Peugeot", "806", Categorie.BERLINES_TAILLE_L, "CR-456-UU", "https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7);
         
         this.vehiculeRepo.save(auto1);
         this.vehiculeRepo.save(auto2);

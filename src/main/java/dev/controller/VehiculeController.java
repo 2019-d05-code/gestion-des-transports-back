@@ -37,16 +37,11 @@ public class VehiculeController {
 		
 	}
 	
-	@ExceptionHandler(value = {EmptyRepositoryException.class})
-	public ResponseEntity<String> handleEmptyRepositoryException(){
+	@ExceptionHandler(value = {EmptyRepositoryException.class, BadArgumentsException.class})
+	public ResponseEntity<String> handleEmptyRepositoryException(Exception e){
 		
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Il n'y a aucun véhicule enregistré dans la base de données");
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 	}
 	
-	@ExceptionHandler(value = {BadArgumentsException.class})
-	public ResponseEntity<String> handleBadArgumentsException(){
-		
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Oo, il semblerait qu'au moins un des arguments ne soit pas valide...");
-	}
 	
 }
