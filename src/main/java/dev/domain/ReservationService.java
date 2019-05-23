@@ -1,5 +1,9 @@
 package dev.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +53,22 @@ public class ReservationService {
 		
 		return reservation; }
 		
+	}
+	
+	//afficher toutes les réservations 
+public List<ReservationDTO> afficherToutesLesReservations(){
+		
+		List<ReservationDTO> listeDeReservation = new ArrayList<>(); 
+		
+		List<Reservation> maListesDeReservation = reservationRepo.findAll(); 
+		
+	for (Reservation reservation : maListesDeReservation) {
+		
+		ReservationDTO reservationDTO = new ReservationDTO(reservation);
+		listeDeReservation.add(reservationDTO);
+	}
+		
+		return listeDeReservation; 
 	}
 	
 	

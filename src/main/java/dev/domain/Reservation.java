@@ -35,14 +35,21 @@ public class Reservation {
 	}
 
 
-public Reservation( LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
+public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
 		super();
+		this.id = id;
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
 	}
 
 
+public Reservation( LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
+		super();
+		this.dateDeReservation = dateDeReservation;
+		this.dateDeRetour = dateDeRetour;
+		this.uneVoiture = uneVoiture;
+	}
 
 	public Vehicule getUneVoiture() {
 		return uneVoiture;
