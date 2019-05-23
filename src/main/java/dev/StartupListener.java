@@ -60,7 +60,6 @@ public class StartupListener {
 		col2.setNom("User");
 		col2.setPrenom("DEV");
 		col2.setEmail("user@dev.fr");
-
 		col2.setPermis("16546FEFGGG155");
 		col2.setTelephone("0645583484");
 		col2.setMotDePasse(passwordEncoder.encode("superpass"));
@@ -73,12 +72,12 @@ public class StartupListener {
 				"https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7);
 
 		Collegue col3 = new Collegue();
-		col3.setNom("User");
-		col3.setPrenom("DEV");
-		col3.setEmail("user@dev.fr");
+		col3.setNom("Chauffeur");
+		col3.setPrenom("CHAUFF");
+		col3.setEmail("chauffeur@dev.fr");
 
-		col3.setPermis("16546FEFGGG155");
-		col3.setTelephone("0645583484");
+		col3.setPermis("16546FEFGGG666");
+		col3.setTelephone("0633445566");
 		col3.setMotDePasse(passwordEncoder.encode("superpass"));
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_CHAUFFEUR),
 				new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));

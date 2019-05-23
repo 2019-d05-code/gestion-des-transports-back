@@ -2,8 +2,6 @@ package dev.exception;
 
 public class BadArgumentsException extends Exception{
 
-	
-	
 	public BadArgumentsException() {
 		super();
 	}
@@ -12,5 +10,4 @@ public class BadArgumentsException extends Exception{
 		super(msg);
 	}
 	
-
 }

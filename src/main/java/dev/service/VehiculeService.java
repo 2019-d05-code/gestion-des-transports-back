@@ -16,7 +16,6 @@ public class VehiculeService {
 
 	@Autowired
 	VehiculeRepo repo;
-
 	
 	public List<Vehicule> listerVehicules() throws EmptyRepositoryException {
 		
@@ -30,8 +29,6 @@ public class VehiculeService {
 			}
 			return resultat;
 		}
-
-		
 	}
 	
 	

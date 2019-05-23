@@ -10,8 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class Vehicule {
 
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -61,7 +59,6 @@ public class Vehicule {
 		this.modele = modele;
 	}
 
-
 	public CategorieVehicule getCategorieVehicule() {
 		return categorie;
 	}
@@ -85,7 +82,6 @@ public class Vehicule {
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-
 
 	public Integer getNbPlaces() {
 		return nbPlaces;

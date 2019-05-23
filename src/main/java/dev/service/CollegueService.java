@@ -1,6 +1,5 @@
 package dev.service;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +18,9 @@ import dev.repository.CollegueRepo;
 @Service
 public class CollegueService {
 
-
 	public CollegueService(CollegueRepo collegueRepo) {
 		this.collegueRepo = collegueRepo;
 	}
-
 
 	@Autowired
 	private CollegueRepo collegueRepo;
