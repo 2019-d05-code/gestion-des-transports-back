@@ -34,20 +34,16 @@ public class Reservation {
 		super();	
 	}
 
-	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, String photoUrl,
-			String immatriculation, String marque, String modele, String categorie) {
-		super();
-		this.dateDeReservation = dateDeReservation;
-		this.dateDeRetour = dateDeRetour;
-	}
 
-
-public Reservation(Vehicule uneVoiture, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour) {
+public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
 		super();
+		this.id = id;
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
 	}
+
+
 
 	public Vehicule getUneVoiture() {
 		return uneVoiture;

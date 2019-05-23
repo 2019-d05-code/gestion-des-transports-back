@@ -60,7 +60,7 @@ public class Vehicule {
 		this.marque = marque;
 		this.modele = modele;
 		this.categorie = categorie;
-		this.immatriculation = immatriculation;
+		this.immatriculation = immatriculation; 
 	}
 
 

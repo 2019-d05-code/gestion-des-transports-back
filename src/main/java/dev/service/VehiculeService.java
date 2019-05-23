@@ -34,16 +34,6 @@ public class VehiculeService {
 	}
 	
 	
-//cette méthodes me permet de récupérer toutes les infos des véhicules
-	public List<Vehicule> listerLes() throws RuntimeException {
-		
-		 List<Vehicule> veh = repo.findAll();
-		
-		 return veh; 
-		
-	}
-	
-	
 	public Vehicule ajouterVehicule(Vehicule vehicule) throws BadArgumentsException {
 		
 		

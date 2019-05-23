@@ -19,7 +19,7 @@ public class ReservationServiceTest {
 		
 		ReservationService srv = new ReservationService(reRepo); 
 		
-		Reservation res = new Reservation(new Vehicule(1),LocalDateTime.now(), LocalDateTime.now()); 
+		Reservation res = new Reservation(1,LocalDateTime.now(), LocalDateTime.now(),new Vehicule(1)); 
 		
 		srv.ajouterReservation(res); 
 		
@@ -36,7 +36,7 @@ public class ReservationServiceTest {
 		
 		ReservationService srv = new ReservationService(reRepo); 
 		
-		Reservation res = new Reservation(new Vehicule(1),null, null ); 
+		Reservation res = new Reservation(1,null, null, new Vehicule(1)); 
 		
 		srv.ajouterReservation(res); 
 		
