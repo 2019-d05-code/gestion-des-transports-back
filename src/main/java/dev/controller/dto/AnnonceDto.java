@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import dev.domain.Annonce;
 import dev.domain.Collegue;
 
-public class AnnonceDto {
+public class AnnonceDTO {
 
 	private Long id;
 	private Long annonceurId;
@@ -17,10 +17,10 @@ public class AnnonceDto {
 	private LocalDateTime dateTimeDepart;
 	private Integer place;
 
-	public AnnonceDto() {
+	public AnnonceDTO() {
 	}
 
-	public AnnonceDto(Long id, Long annonceurId, String adressDepart, String adressArrivee, Duration duree,
+	public AnnonceDTO(Long id, Long annonceurId, String adressDepart, String adressArrivee, Duration duree,
 			Float distance, LocalDateTime dateTimeDepart, Integer place) {
 		super();
 		this.id = id;
@@ -125,7 +125,7 @@ public class AnnonceDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AnnonceDto other = (AnnonceDto) obj;
+		AnnonceDTO other = (AnnonceDTO) obj;
 		if (adressArrivee == null) {
 			if (other.adressArrivee != null)
 				return false;

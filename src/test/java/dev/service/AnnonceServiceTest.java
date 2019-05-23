@@ -14,18 +14,19 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import dev.controller.dto.AnnonceDto;
+import dev.controller.dto.AnnonceDTO;
 import dev.domain.Annonce;
 import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.Vehicule;
+import dev.exception.CollegueNonTrouveException;
 import dev.exception.EmptyRepositoryException;
 import dev.repository.AnnonceRepo;
 import dev.repository.CollegueRepo;
 
 //TODO: Quand Geolocation OK => Verifier valorisations
-public class ServiceTest {
+public class AnnonceServiceTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -35,7 +36,7 @@ public class ServiceTest {
 	private Collegue utilisateur;
 	private Collegue admin;
 	private Annonce annonce;
-	private AnnonceDto annonceDto;
+	private AnnonceDTO annonceDto;
 
 	@Before
 	public void setUp() {
@@ -55,27 +56,27 @@ public class ServiceTest {
 		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
 				LocalDateTime.of(2019, 01, 01, 14, 00), 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDto(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs", "10 rue des arrivee", null,
-				null, LocalDateTime.of(2019, 1, 1, 14, 0), 3);
+		annonceDto = new AnnonceDTO(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
+				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 1, 1, 14, 0), 3);
 	}
 
 	@Test
-	public void testCreerAnnonceOK() throws EmptyRepositoryException {
+	public void test_creer_annonce_OK() throws EmptyRepositoryException {
 
 		annonce.setAnnonceur(utilisateur);
 		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
 		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
 
-		AnnonceDto actual = annonceService.creerAnnonce(annonceDto);
-		AnnonceDto expected = new AnnonceDto(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
+		AnnonceDTO actual = annonceService.creerAnnonce(annonceDto);
+		AnnonceDTO expected = new AnnonceDTO(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
 				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), 3);
 
 		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
-	public void testCreerAnnonceKOCarAnnonceurNexistePas() throws EmptyRepositoryException {
-		expectedException.expect(UsernameNotFoundException.class);
+	public void test_creer_annonce_KO_annonceur_nexiste_pas() throws EmptyRepositoryException {
+		expectedException.expect(CollegueNonTrouveException.class);
 		Collegue annonceur = new Collegue();
 		annonceur.setId(-666L);
 		annonce.setAnnonceur(annonceur);

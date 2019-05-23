@@ -1,29 +1,48 @@
 package dev.controller.dto;
 
-import dev.domain.Collegue;
-import dev.domain.Role;
-import dev.domain.RoleCollegue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import dev.domain.Collegue;
+import dev.domain.Role;
 
 /**
  * Structure modèlisant un collègue servant à communiquer avec l'extérieur (WEB
  * API).
  */
-public class CollegueDto {
+public class CollegueDTO {
 
+	private long id;
 	private String email;
 	private String nom;
 	private String prenom;
+	private String permis;
+	private String telephone;
 	private List<Role> roles = new ArrayList<>();
 
-	public CollegueDto(Collegue col) {
+	public CollegueDTO(Collegue col) {
+		this.id = col.getId();
 		this.email = col.getEmail();
 		this.nom = col.getNom();
 		this.prenom = col.getPrenom();
-		this.roles = col.getRoles().stream().map(RoleCollegue::getRole).collect(Collectors.toList());
+		this.permis = col.getPermis();
+		this.telephone = col.getTelephone();
+		this.roles = col.getRoles().stream().map(roleCollegue -> roleCollegue.getRole()).collect(Collectors.toList());
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -56,5 +75,33 @@ public class CollegueDto {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the permis
+	 */
+	public String getPermis() {
+		return permis;
+	}
+
+	/**
+	 * @param permis the permis to set
+	 */
+	public void setPermis(String permis) {
+		this.permis = permis;
+	}
+
+	/**
+	 * @return the telephone
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/**
+	 * @param telephone the telephone to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 }

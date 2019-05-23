@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import dev.controller.dto.AnnonceDto;
+import dev.controller.dto.AnnonceDTO;
 import dev.domain.Annonce;
 import dev.domain.Collegue;
+import dev.exception.CollegueNonTrouveException;
 import dev.exception.EmptyRepositoryException;
 import dev.repository.AnnonceRepo;
 import dev.repository.CollegueRepo;
@@ -30,10 +31,10 @@ public class AnnonceService {
 		this.collegueRepo = collegueRepo;
 	}
 
-	public AnnonceDto creerAnnonce(AnnonceDto dto) throws EmptyRepositoryException {
+	public AnnonceDTO creerAnnonce(AnnonceDTO dto) {
 		Long idAnnonceur = dto.getAnnonceurId();
 		Collegue annonceur = collegueRepo.findById(idAnnonceur)
-				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
+				.orElseThrow(() -> new CollegueNonTrouveException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonceCree = new Annonce(annonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
 				dto.getDateTimeDepart(), dto.getPlace());
 		annonceRepo.save(annonceCree);
