@@ -13,34 +13,13 @@ import javax.persistence.OneToMany;
 @Entity
 public class Vehicule {
 
-	public enum Categorie {
-		MICRO_URBAINES("Micro-urbaines"),
-		MINI_CITADINES("Mini-citadines"),
-		CITADINES_POLYVALENTES("Citadines polyvalentes"),
-		COMPACTES("Compactes"),
-		BERLINES_TAILLE_S("Berlines Taille S"),
-		BERLINES_TAILLE_M("Berlines Taille M"),
-		BERLINES_TAILLE_L("Berlines Taille L"),
-		SUV_TOUTTERRAINS_PICKUP("SUV, Tout-terrains, Pick-up");
-		
-		private String nom = "";
-		
-		Categorie(String nom) {
-			this.nom = nom;
-		}
-		
-		public String toString() {
-			return nom;
-		}
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String marque;
 	private String modele;
 	@Enumerated(EnumType.STRING)
-	private Categorie categorie;
+	private CategorieVehicule categorie;
 	private String immatriculation;
 	private String photoUrl;
 	private Integer nbPlaces;
@@ -48,20 +27,15 @@ public class Vehicule {
 	@OneToMany(mappedBy = "uneVoiture")
 	List<Reservation> listeDeReservations; 
 	
+	
+	
 	public Vehicule(int id) {
 		super();
 		this.id = id;
 	}
 
 	public Vehicule() {}
-	
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.categorie = categorie;
-		this.immatriculation = immatriculation; 
-	}
+
 
 
 	public List<Reservation> getListeDeReservations() {
@@ -72,17 +46,9 @@ public class Vehicule {
 		this.listeDeReservations = listeDeReservations;
 	}
 
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation, String photoUrl) {
-		super();
-		this.marque = marque;
-		this.modele = modele;
-		this.categorie = categorie;
-		this.immatriculation = immatriculation;
-		this.photoUrl = photoUrl;
-	}
 	
 
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation, String photoUrl, Integer nbPlaces) {
+	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl, Integer nbPlaces) {
 		super();
 		this.marque = marque.toUpperCase();
 		this.modele = modele.toLowerCase();
@@ -120,15 +86,13 @@ public class Vehicule {
 	}
 
 
-	public void setCategorie(String categorie) {
-		this.modele = modele.toLowerCase();
+
+
+	public CategorieVehicule getCategorie() {
+		return categorie;
 	}
 
-	public String getCategorie() {
-		return categorie.toString();
-	}
-
-	public void setCategorie(Categorie categorie) {
+	public void setCategorie(CategorieVehicule categorie) {
 		this.categorie = categorie;
 	}
 

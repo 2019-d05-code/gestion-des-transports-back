@@ -25,9 +25,9 @@ public class VehiculeController {
 	VehiculeService service;
 
 	@GetMapping(value = "/admin/vehicules")
-	public List<Vehicule >voirVehicule()throws EmptyRepositoryException{
+	public ResponseEntity<?> voirVehicule()throws EmptyRepositoryException{
 		
-		return service.listerVehicules(); 
+		return ResponseEntity.ok(service.listerVehicules()); 
 	}
 	
 	@PostMapping(value = "/admin/vehicules")

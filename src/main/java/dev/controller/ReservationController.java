@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.Reservation;
+import dev.domain.ReservationDTO;
 import dev.domain.ReservationService;
 
 @RestController

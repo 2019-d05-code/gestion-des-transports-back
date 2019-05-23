@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +24,7 @@ public class Reservation {
 	@Column(name = "dateDeRetour")
 	private LocalDateTime dateDeRetour; 
 	
-	
-	@ManyToOne 
+	@ManyToOne
 	@JoinColumn(name = "id_vehicule")
 	private Vehicule uneVoiture; 
 	
@@ -35,9 +35,8 @@ public class Reservation {
 	}
 
 
-public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
+public Reservation( LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
 		super();
-		this.id = id;
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;

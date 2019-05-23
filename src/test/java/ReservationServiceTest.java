@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import dev.domain.Reservation;
+import dev.domain.ReservationDTO;
 import dev.domain.ReservationService;
 import dev.domain.Vehicule;
 import dev.exception.ReservationInvalideException;
@@ -19,7 +20,7 @@ public class ReservationServiceTest {
 		
 		ReservationService srv = new ReservationService(reRepo); 
 		
-		Reservation res = new Reservation(1,LocalDateTime.now(), LocalDateTime.now(),new Vehicule(1)); 
+		Reservation res = new Reservation(LocalDateTime.now(), LocalDateTime.now(),new Vehicule(1)); 
 		
 		srv.ajouterReservation(res); 
 		
@@ -36,7 +37,7 @@ public class ReservationServiceTest {
 		
 		ReservationService srv = new ReservationService(reRepo); 
 		
-		Reservation res = new Reservation(1,null, null, new Vehicule(1)); 
+		Reservation res = new Reservation(null, null, new Vehicule(1)); 
 		
 		srv.ajouterReservation(res); 
 		
