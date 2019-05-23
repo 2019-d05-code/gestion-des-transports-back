@@ -13,26 +13,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Vehicule {
 
-	public enum Categorie {
-		MICRO_URBAINES("Micro-urbaines"),
-		MINI_CITADINES("Mini-citadines"),
-		CITADINES_POLYVALENTES("Citadines polyvalentes"),
-		COMPACTES("Compactes"),
-		BERLINES_TAILLE_S("Berlines Taille S"),
-		BERLINES_TAILLE_M("Berlines Taille M"),
-		BERLINES_TAILLE_L("Berlines Taille L"),
-		SUV_TOUTTERRAINS_PICKUP("SUV, Tout-terrains, Pick-up");
-		
-		private String nom = "";
-		
-		Categorie(String nom) {
-			this.nom = nom;
-		}
-		
-		public String toString() {
-			return nom;
-		}
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +20,7 @@ public class Vehicule {
 	private String marque;
 	private String modele;
 	@Enumerated(EnumType.STRING)
-	private Categorie categorie;
+	private CategorieVehicule categorie;
 	private String immatriculation;
 	private String photoUrl;
 	private Integer nbPlaces;
@@ -82,7 +62,7 @@ public class Vehicule {
 	}
 	
 
-	public Vehicule(String marque, String modele, Categorie categorie, String immatriculation, String photoUrl, Integer nbPlaces) {
+	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl, Integer nbPlaces) {
 		super();
 		this.marque = marque.toUpperCase();
 		this.modele = modele.toLowerCase();
@@ -124,11 +104,11 @@ public class Vehicule {
 		this.modele = modele.toLowerCase();
 	}
 
-	public String getCategorie() {
+	public String getCategorieVehicule() {
 		return categorie.toString();
 	}
 
-	public void setCategorie(Categorie categorie) {
+	public void setCategorieVehicule(CategorieVehicule categorie) {
 		this.categorie = categorie;
 	}
 
