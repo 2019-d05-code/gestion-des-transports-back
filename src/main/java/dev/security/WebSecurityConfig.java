@@ -75,8 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						(request, response, authException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
 				.and()
 				// toutes les requêtes doivent être authentifiées
-				.authorizeRequests().anyRequest().authenticated().antMatchers("/h2-console/**").permitAll().and()
-				.headers().frameOptions().disable().and()
+				.authorizeRequests()
+
+				.antMatchers("/h2-console/**").permitAll().antMatchers("/admin").permitAll()
+
+				.anyRequest().authenticated().and()
 				// génération d'un formulaire de login
 				// il faut produire une requête avec les caractéristiques suivantes :
 				// POST /login
