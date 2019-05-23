@@ -123,8 +123,17 @@ public class Collegue {
 	/**
 	 * @param telephone
 	 *            the telephone to set
+
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+  
+  public List<Annonce> getAnnonces() {
+		return annonces;
+	}
+
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
 	}
 }

@@ -17,4 +17,5 @@ public class RestResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> gereCollegueDejaChauffeurException(RuntimeException ex, WebRequest request) {
 		return ResponseEntity.status(404).body(ex.getMessage());
 	}
+  
 }

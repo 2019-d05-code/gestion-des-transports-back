@@ -28,7 +28,7 @@ public class CollegueServiceTest {
 	}
 
 	@Test(expected = CollegueNonTrouveException.class)
-	public void modifierRole_KO_mauvais_matricule() {
+	public void modifierRole_KO_car_mauvais_matricule() {
 		LOG.info("Losr d'une recherche d'un collegue avec un mauvais matricule");
 		LOG.info("Alors une exception Collegue non trouvé est lancée");
 		collegueService.modifierRole(1000);
