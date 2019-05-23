@@ -32,15 +32,15 @@ public class StartupListener {
     private PasswordEncoder passwordEncoder;
     private CollegueRepo collegueRepo;
     private VehiculeRepo vehiculeRepo;
-    private ReservationRepository reservationRepo; 
+   
 
-	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo, ReservationRepository reservationRepo) {
+	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo) {
         this.appVersion = appVersion;
         this.versionRepo = versionRepo;
         this.passwordEncoder = passwordEncoder;
         this.collegueRepo = collegueRepo;
         this.vehiculeRepo = vehiculeRepo;
-        this.reservationRepo=reservationRepo;
+       
     }
 
     @EventListener(ContextRefreshedEvent.class)
