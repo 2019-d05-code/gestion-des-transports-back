@@ -37,10 +37,10 @@ public class AnnonceService {
 
 	@Transactional
 	public AnnonceDto creerAnnonce(AnnonceDto dto) throws EmptyRepositoryException {
-		Long idAnnonceur = dto.getAnnonceurId();
+		Long idAnnonceur = dto.getAnnonceur().getId();
 		Collegue annonceur = collegueRepo.findById(idAnnonceur)
 				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
-		Annonce annonceCree = new Annonce(idAnnonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
+		Annonce annonceCree = new Annonce(annonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
 				dto.getDateTimeDepart(), dto.getPlace());
 		annonceRepo.save(annonceCree);
 		List<Annonce> annonces = annonceur.getAnnonces();

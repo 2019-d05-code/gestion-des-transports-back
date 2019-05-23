@@ -74,7 +74,7 @@ public class StartupListener {
 
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
-		Annonce annonce = new Annonce(col1.getId(), "48 rue de la Boustifaille", "13 allée de l'arrivee", Duration.ofHours(2),
+		Annonce annonce = new Annonce(col1, "48 rue de la Boustifaille", "13 allée de l'arrivee", Duration.ofHours(2),
 				42f, LocalDateTime.now(), 4);
 		annonceRepo.save(annonce);
 

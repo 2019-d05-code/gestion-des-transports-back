@@ -29,7 +29,6 @@ public class ServiceTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
-	private CollegueService collegueService;
 	private CollegueRepo collegueRepo;
 	private AnnonceService annonceService;
 	private AnnonceRepo annonceRepo;
@@ -41,7 +40,6 @@ public class ServiceTest {
 	@Before
 	public void setUp() {
 		collegueRepo = Mockito.mock(CollegueRepo.class);
-		collegueService = new CollegueService(collegueRepo);
 		annonceRepo = Mockito.mock(AnnonceRepo.class);
 		annonceService = new AnnonceService(annonceRepo, collegueRepo);
 
@@ -54,52 +52,52 @@ public class ServiceTest {
 		admin.setId(43L);
 		admin.getRoles().add(new RoleCollegue(utilisateur, Role.ROLE_ADMINISTRATEUR));
 
-		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", Duration.ofHours(2), 42f,
+		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
 				LocalDateTime.of(2019, 01, 01, 14, 00), 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDto(42L, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
-				LocalDateTime.of(2019, 1, 1, 14, 0), 3);
+		annonceDto = new AnnonceDto(annonce.getId(), utilisateur, "42 rue des utilisateurs", "10 rue des arrivee", null,
+				null, LocalDateTime.of(2019, 1, 1, 14, 0), 3);
 	}
 
-//	@Test
-//	public void testCreerAnnonceOK() throws EmptyRepositoryException {
-//
-//		annonce.setAnnonceur(utilisateur);
-//		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
-//		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
-//
-//		AnnonceDto actual = annonceService.creerAnnonce(annonceDto);
-//		AnnonceDto expected = new AnnonceDto(utilisateur.getId(), "42 rue des utilisateurs", "10 rue des arrivee", null,
-//				null, LocalDateTime.of(2019, 01, 01, 14, 00), 3);
-//
-//		Assert.assertEquals(expected, actual);
-//	}
-//
-//	@Test
-//	public void testCreerAnnonceValoriseLesAnnoncesDuCollegueOK() throws EmptyRepositoryException {
-//
-//		annonce.setAnnonceur(utilisateur);
-//		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
-//		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
-//
-//		annonceService.creerAnnonce(annonceDto);
-//		List<Annonce> actual = annonce.getAnnonceur().getAnnonces();
-//		List<Annonce> expected = new ArrayList<>();
-//		expected.add(annonce);
-//		Assert.assertEquals(expected, actual);
-//	}
-//
-//	@Test
-//	public void testCreerAnnonceKO() throws EmptyRepositoryException {
-//		expectedException.expect(UsernameNotFoundException.class);
-//		Collegue annonceur = new Collegue();
-//		annonceur.setId(-666L);
-//		annonce.setAnnonceur(annonceur);
-//
-//		annonceService.creerAnnonce(annonceDto);
-//
-//		expectedException.expect(UsernameNotFoundException.class);
-//		expectedException.expectMessage("L'annonceur n'a pas été retrouvé");
-//	}
+	@Test
+	public void testCreerAnnonceOK() throws EmptyRepositoryException {
+
+		annonce.setAnnonceur(utilisateur);
+		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
+		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
+
+		AnnonceDto actual = annonceService.creerAnnonce(annonceDto);
+		AnnonceDto expected = new AnnonceDto(annonce.getId(), utilisateur, "42 rue des utilisateurs",
+				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), 3);
+
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testCreerAnnonceValoriseLesAnnoncesDuCollegueOK() throws EmptyRepositoryException {
+
+		annonce.setAnnonceur(utilisateur);
+		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
+		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
+
+		annonceService.creerAnnonce(annonceDto);
+		List<Annonce> actual = utilisateur.getAnnonces();
+		List<Annonce> expected = new ArrayList<>();
+		expected.add(annonce);
+		Assert.assertTrue(actual.contains(annonce));
+	}
+
+	@Test
+	public void testCreerAnnonceKOCarAnnonceurNexistePas() throws EmptyRepositoryException {
+		expectedException.expect(UsernameNotFoundException.class);
+		Collegue annonceur = new Collegue();
+		annonceur.setId(-666L);
+		annonce.setAnnonceur(annonceur);
+
+		annonceService.creerAnnonce(annonceDto);
+
+		expectedException.expect(UsernameNotFoundException.class);
+		expectedException.expectMessage("L'annonceur n'a pas été retrouvé");
+	}
 
 }

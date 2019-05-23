@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 
 import dev.domain.Annonce;
 import dev.domain.Collegue;
-import dev.domain.Vehicule;
 
 public class AnnonceDto {
 
-	private Long annonceurId;
+	private Long id;
+	private Collegue annonceur;
 	private String adressDepart;
 	private String adressArrivee;
 	private Duration duree;
@@ -20,10 +20,11 @@ public class AnnonceDto {
 	public AnnonceDto() {
 	}
 	
-	public AnnonceDto(Long annonceurId, String adressDepart, String adressArrivee, Duration duree, Float distance,
-			LocalDateTime dateTimeDepart, Integer place) {
+	public AnnonceDto(Long id, Collegue annonceur, String adressDepart, String adressArrivee, Duration duree,
+			Float distance, LocalDateTime dateTimeDepart, Integer place) {
 		super();
-		this.annonceurId = annonceurId;
+		this.id = id;
+		this.annonceur = annonceur;
 		this.adressDepart = adressDepart;
 		this.adressArrivee = adressArrivee;
 		this.duree = duree;
@@ -31,13 +32,21 @@ public class AnnonceDto {
 		this.dateTimeDepart = dateTimeDepart;
 		this.place = place;
 	}
-
-	public Long getAnnonceurId() {
-		return annonceurId;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setAnnonceurId(Long annonceurId) {
-		this.annonceurId = annonceurId;
+	public void setId(Long id) {
+		id = id;
+	}
+
+	public Collegue getAnnonceur() {
+		return annonceur;
+	}
+
+	public void setAnnonceur(Collegue annonceur) {
+		this.annonceur = annonceur;
 	}
 
 	public String getAdressDepart() {
@@ -89,7 +98,9 @@ public class AnnonceDto {
 	}
 
 	public Annonce dtoToObject() {
-		return new Annonce(annonceurId, adressDepart, adressArrivee, duree, distance, dateTimeDepart, place);
+		Annonce annonce = new Annonce(annonceur, adressDepart, adressArrivee, duree, distance, dateTimeDepart, place);
+		annonce.setId(id);
+		return annonce;
 	}
 
 	@Override
@@ -98,7 +109,7 @@ public class AnnonceDto {
 		int result = 1;
 		result = prime * result + ((adressArrivee == null) ? 0 : adressArrivee.hashCode());
 		result = prime * result + ((adressDepart == null) ? 0 : adressDepart.hashCode());
-		result = prime * result + ((annonceurId == null) ? 0 : annonceurId.hashCode());
+		result = prime * result + ((annonceur == null) ? 0 : annonceur.hashCode());
 		result = prime * result + ((dateTimeDepart == null) ? 0 : dateTimeDepart.hashCode());
 		result = prime * result + ((distance == null) ? 0 : distance.hashCode());
 		result = prime * result + ((duree == null) ? 0 : duree.hashCode());
@@ -125,10 +136,10 @@ public class AnnonceDto {
 				return false;
 		} else if (!adressDepart.equals(other.adressDepart))
 			return false;
-		if (annonceurId == null) {
-			if (other.annonceurId != null)
+		if (annonceur == null) {
+			if (other.annonceur != null)
 				return false;
-		} else if (!annonceurId.equals(other.annonceurId))
+		} else if (!annonceur.equals(other.annonceur))
 			return false;
 		if (dateTimeDepart == null) {
 			if (other.dateTimeDepart != null)
@@ -152,5 +163,7 @@ public class AnnonceDto {
 			return false;
 		return true;
 	}
+
+	
 	
 }

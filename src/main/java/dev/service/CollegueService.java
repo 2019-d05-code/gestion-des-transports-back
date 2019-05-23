@@ -33,7 +33,7 @@ public class CollegueService {
 	@Transactional
 	public void sauvegarderAnnonce(AnnonceDto annonceDto) {
 		
-		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceurId())
+		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceur().getId())
 				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonce = annonceDto.dtoToObject();
 		

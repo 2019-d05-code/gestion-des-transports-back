@@ -21,7 +21,8 @@ public class Collegue {
 	@OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
 	private List<RoleCollegue> roles;
 
-	@OneToMany(mappedBy = "annonceur")
+	@OneToMany
+	@JoinColumn(name = "annonceur_id")
 	private List<Annonce> annonces;
 
 	public Collegue() {
@@ -147,8 +148,6 @@ public class Collegue {
 		} else if (!roles.equals(other.roles))
 			return false;
 		return true;
-	}
-
-	
+	}	
 
 }
