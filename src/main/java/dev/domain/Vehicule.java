@@ -49,7 +49,7 @@ public class Vehicule {
 	}
 
 	public void setMarque(String marque) {
-		this.marque = marque.toUpperCase();
+		this.marque = marque;
 	}
 
 	public String getModele() {
@@ -57,11 +57,11 @@ public class Vehicule {
 	}
 
 	public void setModele(String modele) {
-		this.modele = modele.toLowerCase();
+		this.modele = modele;
 	}
 
-	public String getCategorieVehicule() {
-		return categorie.toString();
+	public CategorieVehicule getCategorieVehicule() {
+		return categorie;
 	}
 
 	public void setCategorieVehicule(CategorieVehicule categorie) {
@@ -73,7 +73,7 @@ public class Vehicule {
 	}
 
 	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation.toUpperCase();
+		this.immatriculation = immatriculation;
 	}
 
 	public String getPhotoUrl() {
