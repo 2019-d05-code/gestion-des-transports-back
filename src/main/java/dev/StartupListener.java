@@ -73,7 +73,6 @@ public class StartupListener {
 
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
-
 	}
 
 }

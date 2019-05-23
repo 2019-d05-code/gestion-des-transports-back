@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -77,9 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// toutes les requêtes doivent être authentifiées
 				.authorizeRequests()
 
-				.antMatchers("/h2-console/**").permitAll().antMatchers("/admin").permitAll()
-
-				.anyRequest().authenticated().and()
+				.antMatchers("/h2-console/**").permitAll().antMatchers(HttpMethod.GET, "/admin/vehicules").permitAll()
+				.antMatchers(HttpMethod.POST, "/admin/vehicules").permitAll().antMatchers("/admin").permitAll()
+				.anyRequest().authenticated().and().headers().frameOptions().disable().and()
 				// génération d'un formulaire de login
 				// il faut produire une requête avec les caractéristiques suivantes :
 				// POST /login
