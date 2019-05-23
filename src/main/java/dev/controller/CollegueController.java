@@ -35,4 +35,5 @@ public class CollegueController {
 	public ResponseEntity<String> gereEmptyRepositoryException(EmptyRepositoryException ere) {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ere.getMessage());
 	}
+
 }

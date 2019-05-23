@@ -17,7 +17,7 @@ public class Annonce {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	@ManyToOne
-	@JoinColumn(name = "anonceur_id")
+	@JoinColumn(name = "annonceur_id")
 	private Collegue annonceur;
 	private String adressDepart;
 	private String adressArrivee;

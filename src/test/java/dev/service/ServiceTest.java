@@ -55,7 +55,7 @@ public class ServiceTest {
 		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
 				LocalDateTime.of(2019, 01, 01, 14, 00), 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDto(annonce.getId(), utilisateur, "42 rue des utilisateurs", "10 rue des arrivee", null,
+		annonceDto = new AnnonceDto(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs", "10 rue des arrivee", null,
 				null, LocalDateTime.of(2019, 1, 1, 14, 0), 3);
 	}
 
@@ -67,24 +67,10 @@ public class ServiceTest {
 		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
 
 		AnnonceDto actual = annonceService.creerAnnonce(annonceDto);
-		AnnonceDto expected = new AnnonceDto(annonce.getId(), utilisateur, "42 rue des utilisateurs",
+		AnnonceDto expected = new AnnonceDto(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
 				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), 3);
 
 		Assert.assertEquals(expected, actual);
-	}
-
-	@Test
-	public void testCreerAnnonceValoriseLesAnnoncesDuCollegueOK() throws EmptyRepositoryException {
-
-		annonce.setAnnonceur(utilisateur);
-		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
-		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
-
-		annonceService.creerAnnonce(annonceDto);
-		List<Annonce> actual = utilisateur.getAnnonces();
-		List<Annonce> expected = new ArrayList<>();
-		expected.add(annonce);
-		Assert.assertTrue(actual.contains(annonce));
 	}
 
 	@Test

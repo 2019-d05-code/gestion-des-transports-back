@@ -1,7 +1,5 @@
 package dev.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,9 @@ public class CollegueService {
 
 	public CollegueService() {
 	}
-	
+
 	public CollegueService(CollegueRepo collegueRepo) {
-	this.collegueRepo = collegueRepo;
+		this.collegueRepo = collegueRepo;
 	}
 
 	public void sauvegarderCollegue(Collegue collegue) {
@@ -32,11 +30,11 @@ public class CollegueService {
 
 	@Transactional
 	public void sauvegarderAnnonce(AnnonceDto annonceDto) {
-		
-		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceur().getId())
+
+		Collegue annonceur = collegueRepo.findById(annonceDto.getAnnonceurId())
 				.orElseThrow(() -> new UsernameNotFoundException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonce = annonceDto.dtoToObject();
-		
+
 	}
 
 }
