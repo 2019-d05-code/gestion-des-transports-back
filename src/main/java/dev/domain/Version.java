@@ -10,9 +10,7 @@ public class Version {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "dateTimeCreated")
     private ZonedDateTime dateTimeCreated;
-    @Column(name = "gitVersion")
     private String gitVersion;
 
     public Version() {
