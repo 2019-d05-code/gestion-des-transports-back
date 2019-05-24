@@ -18,7 +18,6 @@ public class DemoApplication {
 						.allowedOrigins("*")
 						.allowedMethods("GET", "POST", "PATCH", "PUT", "OPTIONS")
 						.allowCredentials(true);
-				;
 			}
 		};
 	}

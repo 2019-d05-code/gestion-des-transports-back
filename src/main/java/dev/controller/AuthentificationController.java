@@ -1,6 +1,7 @@
 package dev.controller;
 
-import dev.controller.dto.CollegueVM;
+
+import dev.controller.dto.CollegueDTO;
 import dev.repository.CollegueRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AuthentificationController {
     public ResponseEntity<?> quiSuisJe() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return this.collegueRepo.findByEmail(email)
-                .map(CollegueVM::new)
+                .map(CollegueDTO::new)
                 .map(col -> ResponseEntity.ok(col))
                 .orElse(ResponseEntity.badRequest().build());
     }

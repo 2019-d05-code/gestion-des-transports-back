@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Vehicule {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -92,6 +91,11 @@ public class Vehicule {
 
 	public void setModele(String modele) {
 		this.modele = modele;
+
+	}
+
+	public CategorieVehicule getCategorieVehicule() {
+		return categorie;
 	}
 
 
@@ -102,6 +106,7 @@ public class Vehicule {
 	public void setImmatriculation(String immatriculation) {
 
 		this.immatriculation = immatriculation.toUpperCase();
+
 	}
 
 	public String getPhotoUrl() {
