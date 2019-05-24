@@ -71,6 +71,18 @@ public class StartupListener {
 		Vehicule auto2 = new Vehicule("Peugeot", "806", CategorieVehicule.BERLINES_TAILLE_L, "CR-456-UU",
 				"https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7);
 
+		Collegue col3 = new Collegue();
+		col3.setNom("Chauffeur");
+		col3.setPrenom("CHAUFF");
+		col3.setEmail("chauffeur@dev.fr");
+
+		col3.setPermis("16546FEFGGG666");
+		col3.setTelephone("0633445566");
+		col3.setMotDePasse(passwordEncoder.encode("superpass"));
+		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_CHAUFFEUR),
+				new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
+		this.collegueRepo.save(col3);
+
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
 	}

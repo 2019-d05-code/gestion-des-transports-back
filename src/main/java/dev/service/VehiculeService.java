@@ -29,7 +29,6 @@ public class VehiculeService {
 			}
 			return resultat;
 		}
-		
 	}
 	
 	

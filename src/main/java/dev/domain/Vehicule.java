@@ -10,7 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class Vehicule {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
