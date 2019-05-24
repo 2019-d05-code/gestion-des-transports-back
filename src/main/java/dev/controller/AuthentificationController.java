@@ -1,6 +1,6 @@
 package dev.controller;
 
-import dev.controller.vm.CollegueVM;
+import dev.controller.dto.CollegueVM;
 import dev.repository.CollegueRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;

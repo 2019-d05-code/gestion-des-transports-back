@@ -1,4 +1,4 @@
-package dev.controller.vm;
+package dev.controller.dto;
 
 import dev.domain.Collegue;
 import dev.domain.Role;

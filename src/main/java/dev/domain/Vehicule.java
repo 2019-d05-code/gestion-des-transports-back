@@ -30,6 +30,14 @@ public class Vehicule {
 	
 	
 	
+	public CategorieVehicule getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategorieVehicule categorie) {
+		this.categorie = categorie;
+	}
+
 	public Vehicule(int id) {
 		super();
 		this.id = id;

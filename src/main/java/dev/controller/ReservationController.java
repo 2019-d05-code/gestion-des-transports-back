@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.controller.dto.ReservationDTO;
 import dev.domain.Reservation;
-import dev.domain.ReservationDTO;
-import dev.domain.ReservationService;
+import dev.service.ReservationService;
 
 @RestController
 public class ReservationController {

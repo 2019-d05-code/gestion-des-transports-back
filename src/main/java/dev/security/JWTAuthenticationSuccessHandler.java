@@ -1,7 +1,8 @@
 package dev.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.controller.vm.CollegueVM;
+
+import dev.controller.dto.CollegueVM;
 import dev.domain.Collegue;
 import dev.repository.CollegueRepo;
 import io.jsonwebtoken.Jwts;

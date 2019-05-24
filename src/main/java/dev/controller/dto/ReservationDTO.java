@@ -1,6 +1,8 @@
-package dev.domain;
+package dev.controller.dto;
 
 import java.time.LocalDateTime;
+
+import dev.domain.Reservation;
 
 public class ReservationDTO {
 
