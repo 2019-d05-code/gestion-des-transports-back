@@ -24,6 +24,7 @@ public class Vehicule {
 	private StatutVehicule statutVehicule;
 
 	public Vehicule() {
+		this.statutVehicule = StatutVehicule.EN_SERVICE;
 	}
 
 	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl,
@@ -71,14 +72,6 @@ public class Vehicule {
 
 	public void setModele(String modele) {
 		this.modele = modele;
-	}
-
-	public CategorieVehicule getCategorieVehicule() {
-		return categorie;
-	}
-
-	public void setCategorieVehicule(CategorieVehicule categorie) {
-		this.categorie = categorie;
 	}
 
 	public String getImmatriculation() {
