@@ -2,7 +2,7 @@ package dev.domain;
 
 public enum StatutVehicule {
 
-	N_SERVICE("en_service"), EN_REPARATION("en_reparation"), HORS_SERVICE("hors_service");
+	EN_SERVICE("En Service"), EN_REPARATION("En Reparation"), HORS_SERVICE("Hors-service");
 
 	private String nom;
 

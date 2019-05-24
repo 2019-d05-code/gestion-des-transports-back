@@ -47,7 +47,7 @@ public class VehiculeController {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 	}
 
-	@PatchMapping(value = "admin/vehicules/modifierStatut")
+	@PatchMapping(value = "admin/vehicules/{immatriculation}")
 	public ResponseEntity<ModifierStatutVehiculeDTO> modifierStatusVehicule(
 			@RequestBody ModifierStatutVehiculeDTO ModifierStatutVehiculeDTO) {
 		return ResponseEntity.ok(service.modifierStatutVehicule(ModifierStatutVehiculeDTO.getImmatriculation(),
