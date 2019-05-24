@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import dev.domain.CategorieVehicule;
 import dev.domain.Vehicule;
 import dev.exception.BadArgumentsException;
+import dev.exception.VehiculeNonTrouverException;
 import dev.repository.VehiculeRepo;
 import dev.service.VehiculeService;
 
@@ -99,6 +100,14 @@ public class VehiculeServiceTest {
 
 		Mockito.verify(mock).save(vehicule);
 
+	}
+
+	@Test
+	public void testtrouverVehiculeMatricule() throws VehiculeNonTrouverException {
+		exception.expect(VehiculeNonTrouverException.class);
+		exception.expectMessage("Le vehicule n'a pas été trouvé !");
+		String immatriculation = "bhdbdsk";
+		service.trouverVehiculeImmatriculation(immatriculation);
 	}
 
 }

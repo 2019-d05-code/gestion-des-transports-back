@@ -13,6 +13,7 @@ import dev.domain.StatutVehicule;
 import dev.domain.Vehicule;
 import dev.exception.BadArgumentsException;
 import dev.exception.EmptyRepositoryException;
+import dev.exception.VehiculeNonTrouverException;
 import dev.repository.VehiculeRepo;
 
 @Service
@@ -70,6 +71,16 @@ public class VehiculeService {
 		vehicule.get().setStatutVehicule(status);
 		ModifierStatutVehiculeDTO vehiculeDTO = new ModifierStatutVehiculeDTO(vehicule.get());
 		return vehiculeDTO;
+	}
+
+	public Vehicule trouverVehiculeImmatriculation(String immatriculation) throws VehiculeNonTrouverException {
+		Optional<Vehicule> vehicule = repo.findByImmatriculation(immatriculation);
+		if (vehicule.isPresent()) {
+			return vehicule.get();
+		} else {
+			throw new VehiculeNonTrouverException("Le vehicule n'a pas été trouvé !");
+		}
+
 	}
 
 	public void setRepo(VehiculeRepo repo) {

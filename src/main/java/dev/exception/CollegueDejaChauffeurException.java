@@ -1,5 +1,5 @@
 package dev.exception;
 
-public class CollegueDejaChauffeurException extends RuntimeException{
+public class CollegueDejaChauffeurException extends RuntimeException {
 
 }

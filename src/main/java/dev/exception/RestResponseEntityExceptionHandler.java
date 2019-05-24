@@ -19,4 +19,9 @@ public class RestResponseEntityExceptionHandler {
 		String bodyOfResponse = "Le Collegue a déjà le role de chauffeur";
 		return ResponseEntity.status(404).body(bodyOfResponse);
 	}
+
+	@ExceptionHandler(value = { VehiculeNonTrouverException.class })
+	protected ResponseEntity<Object> VehiculeNonTrouverException(RuntimeException ex, WebRequest request) {
+		return ResponseEntity.status(404).body(ex.getMessage());
+	}
 }
