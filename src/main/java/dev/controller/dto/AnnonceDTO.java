@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import dev.domain.Annonce;
-import dev.domain.Collegue;
 
 public class AnnonceDTO {
 
@@ -15,13 +14,17 @@ public class AnnonceDTO {
 	private Duration duree;
 	private Float distance;
 	private LocalDateTime dateTimeDepart;
+	private String immatriculationVehicule;
+	private String marque;
+	private String modele;
 	private Integer place;
 
 	public AnnonceDTO() {
 	}
 
 	public AnnonceDTO(Long id, Long annonceurId, String adressDepart, String adressArrivee, Duration duree,
-			Float distance, LocalDateTime dateTimeDepart, Integer place) {
+			Float distance, LocalDateTime dateTimeDepart, String immatriculationVehicule, String marque, String modele,
+			Integer place) {
 		super();
 		this.id = id;
 		this.annonceurId = annonceurId;
@@ -30,6 +33,9 @@ public class AnnonceDTO {
 		this.duree = duree;
 		this.distance = distance;
 		this.dateTimeDepart = dateTimeDepart;
+		this.immatriculationVehicule = immatriculationVehicule;
+		this.marque = marque;
+		this.modele = modele;
 		this.place = place;
 	}
 
@@ -88,6 +94,30 @@ public class AnnonceDTO {
 	public void setDateTimeDepart(LocalDateTime dateTimeDepart) {
 		this.dateTimeDepart = dateTimeDepart;
 	}
+	
+	public String getImmatriculationVehicule() {
+		return immatriculationVehicule;
+	}
+
+	public void setImmatriculationVehicule(String immatriculationVehicule) {
+		this.immatriculationVehicule = immatriculationVehicule;
+	}
+
+	public String getMarque() {
+		return marque;
+	}
+
+	public void setMarque(String marque) {
+		this.marque = marque;
+	}
+
+	public String getModele() {
+		return modele;
+	}
+
+	public void setModele(String modele) {
+		this.modele = modele;
+	}
 
 	public Integer getPlace() {
 		return place;
@@ -98,7 +128,7 @@ public class AnnonceDTO {
 	}
 
 	public Annonce dtoToObject() {
-		Annonce annonce = new Annonce(null, adressDepart, adressArrivee, duree, distance, dateTimeDepart, place);
+		Annonce annonce = new Annonce(null, adressDepart, adressArrivee, duree, distance, dateTimeDepart, immatriculationVehicule, marque, modele, place);
 		annonce.setId(id);
 		return annonce;
 	}
@@ -113,6 +143,9 @@ public class AnnonceDTO {
 		result = prime * result + ((dateTimeDepart == null) ? 0 : dateTimeDepart.hashCode());
 		result = prime * result + ((distance == null) ? 0 : distance.hashCode());
 		result = prime * result + ((duree == null) ? 0 : duree.hashCode());
+		result = prime * result + ((immatriculationVehicule == null) ? 0 : immatriculationVehicule.hashCode());
+		result = prime * result + ((marque == null) ? 0 : marque.hashCode());
+		result = prime * result + ((modele == null) ? 0 : modele.hashCode());
 		result = prime * result + ((place == null) ? 0 : place.hashCode());
 		return result;
 	}
@@ -155,6 +188,21 @@ public class AnnonceDTO {
 			if (other.duree != null)
 				return false;
 		} else if (!duree.equals(other.duree))
+			return false;
+		if (immatriculationVehicule == null) {
+			if (other.immatriculationVehicule != null)
+				return false;
+		} else if (!immatriculationVehicule.equals(other.immatriculationVehicule))
+			return false;
+		if (marque == null) {
+			if (other.marque != null)
+				return false;
+		} else if (!marque.equals(other.marque))
+			return false;
+		if (modele == null) {
+			if (other.modele != null)
+				return false;
+		} else if (!modele.equals(other.modele))
 			return false;
 		if (place == null) {
 			if (other.place != null)

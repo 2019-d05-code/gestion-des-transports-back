@@ -36,7 +36,8 @@ public class AnnonceService {
 		Collegue annonceur = collegueRepo.findById(idAnnonceur)
 				.orElseThrow(() -> new CollegueNonTrouveException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonceCree = new Annonce(annonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
-				dto.getDateTimeDepart(), dto.getPlace());
+				dto.getDateTimeDepart(), dto.getImmatriculationVehicule(), dto.getMarque(), dto.getModele(),
+				dto.getPlace());
 		annonceRepo.save(annonceCree);
 
 		// TODO: quand géolocalisation fonctionnelle => annonce et dto renvoyée
