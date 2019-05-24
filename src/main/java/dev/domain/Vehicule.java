@@ -36,6 +36,7 @@ public class Vehicule {
 		this.immatriculation = immatriculation.toUpperCase();
 		this.photoUrl = photoUrl;
 		this.nbPlaces = nbPlaces;
+		this.statutVehicule = StatutVehicule.EN_SERVICE;
 	}
 
 	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl,
