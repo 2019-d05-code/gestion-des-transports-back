@@ -1,16 +1,20 @@
 package dev.domain;
 
+
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name = "version")
 public class Version {
-
-    @Id
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+	@Column(name = "dateTimeCreated")
     private ZonedDateTime dateTimeCreated;
+	@Column(name = "gitVersion")
     private String gitVersion;
 
     public Version() {
@@ -62,5 +66,6 @@ public class Version {
     @Override
     public int hashCode() {
         return Objects.hash(id, dateTimeCreated, gitVersion);
-    }
+}
+
 }

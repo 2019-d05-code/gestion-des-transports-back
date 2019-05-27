@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// toutes les requêtes doivent être authentifiées
 				.authorizeRequests()
 
+
 				.antMatchers("/h2-console/**").permitAll().antMatchers(HttpMethod.GET, "/admin/vehicules").permitAll()
 				.antMatchers(HttpMethod.POST, "/admin/vehicules").permitAll().antMatchers("/admin").permitAll()
 				.anyRequest().authenticated().and().headers().frameOptions().disable().and()

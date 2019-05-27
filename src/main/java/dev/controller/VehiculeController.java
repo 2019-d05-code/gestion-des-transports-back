@@ -1,5 +1,6 @@
 package dev.controller;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,19 +23,17 @@ public class VehiculeController {
 
 	@Autowired
 	VehiculeService service;
-	
+
 	@GetMapping(value = "/admin/vehicules")
-	public ResponseEntity<?> listeVehicules() throws EmptyRepositoryException {
+	public ResponseEntity<?> voirVehicule()throws EmptyRepositoryException{
 		
-			return ResponseEntity.ok(service.listerVehicules());
-		
+		return ResponseEntity.ok(service.listerVehicules()); 
 	}
 	
 	@PostMapping(value = "/admin/vehicules")
 	public ResponseEntity<?> enregistrerVehicule(@RequestBody Vehicule vehicule) throws BadArgumentsException {
 		
-		return ResponseEntity.ok(service.ajouterVehicule(vehicule));
-		
+		return ResponseEntity.ok(service.ajouterVehicule(vehicule));	
 	}
 	
 	@ExceptionHandler(value = {EmptyRepositoryException.class, BadArgumentsException.class})
@@ -44,4 +43,6 @@ public class VehiculeController {
 	}
 	
 	
+	
 }
+

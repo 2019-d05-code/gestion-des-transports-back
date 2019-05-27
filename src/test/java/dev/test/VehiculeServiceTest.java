@@ -6,8 +6,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import dev.domain.Vehicule;
 import dev.domain.CategorieVehicule;
+import dev.domain.Vehicule;
+
 import dev.exception.BadArgumentsException;
 import dev.repository.VehiculeRepo;
 import dev.service.VehiculeService;

@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class VersionController {
 
-    private VersionRepo versionRepo;
+	private VersionRepo versionRepo;
 
     public VersionController(VersionRepo versionRepo) {
         this.versionRepo = versionRepo;
@@ -23,6 +23,5 @@ public class VersionController {
     @GetMapping("/versions")
     public List<Version> getVersion() {
         return this.versionRepo.findAll();
-    }
-
+}
 }
