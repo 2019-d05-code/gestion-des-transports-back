@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.ModifierStatutVehiculeDTO;
+import dev.controller.dto.VehiculeDTO;
 import dev.domain.Vehicule;
 import dev.exception.BadArgumentsException;
 import dev.exception.EmptyRepositoryException;
@@ -59,7 +60,7 @@ public class VehiculeController {
 
 	@RequestMapping(path = "admin/vehicules/{immatriculation}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Vehicule> trouverVehiculeAvecImmatriculation(@PathVariable String immatriculation) {
+	public ResponseEntity<VehiculeDTO> trouverVehiculeAvecImmatriculation(@PathVariable String immatriculation) {
 		return ResponseEntity.ok(service.trouverVehiculeImmatriculation(immatriculation));
 	}
 

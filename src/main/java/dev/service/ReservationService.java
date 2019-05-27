@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ReservationDTO;
 import dev.domain.Reservation;
+import dev.exception.EmptyRepositoryException;
 import dev.exception.ReservationInvalideException;
 import dev.repository.ReservationRepository;
 import dev.repository.VehiculeRepo;
@@ -44,33 +45,46 @@ public class ReservationService {
 	
 	//ajouter une réservation 
 	
-	public Reservation ajouterReservation(Reservation reservation) throws Exception {
+	public Reservation ajouterReservation(Reservation reservation) throws ReservationInvalideException {
 		
-		if(reservation.getDateDeReservation()==null || reservation.getDateDeRetour() ==null) {
-			
+		if(reservation.getDateDeReservation()==null || reservation.getDateDeRetour() ==null) {	
 			throw new ReservationInvalideException("on ne peut pas ajouter cette réservation"); 
 		}else {
 		
 		reservationRepo.save(reservation); 
-		
 		return reservation; }
 		
 	}
 	
 	//afficher toutes les réservations 
-public List<ReservationDTO> afficherToutesLesReservations(){
+	public List<ReservationDTO> afficherToutesLesReservations(){
 		
 		List<ReservationDTO> listeDeReservation = new ArrayList<>(); 
-		
 		List<Reservation> maListesDeReservation = reservationRepo.findAll(); 
 		
-	for (Reservation reservation : maListesDeReservation) {
-		
-		ReservationDTO reservationDTO = new ReservationDTO(reservation);
-		listeDeReservation.add(reservationDTO);
-	}
-		
+		for (Reservation reservation : maListesDeReservation) {
+			ReservationDTO reservationDTO = new ReservationDTO(reservation);
+			listeDeReservation.add(reservationDTO);
+		}
 		return listeDeReservation; 
+	}
+
+	public List<ReservationDTO> afficherListeReservationVehicule(String immatriculation) throws EmptyRepositoryException {
+	
+		List<ReservationDTO> listeResasDTO = new ArrayList<>();
+		List<Reservation> listeResas = reservationRepo.findByVehiculeImmatriculation(immatriculation);
+	
+		if(listeResas.isEmpty()) {
+			throw new EmptyRepositoryException("Aucune réservation enregistrée pour ce véhicule");
+		}
+		
+		for(Reservation resa:listeResas) {
+			ReservationDTO resaDTO = new ReservationDTO(resa);
+			listeResasDTO.add(resaDTO);
+		}
+		
+		return listeResasDTO;
+		
 	}
 	
 	

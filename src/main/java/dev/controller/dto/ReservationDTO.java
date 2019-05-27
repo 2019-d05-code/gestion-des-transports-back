@@ -21,7 +21,10 @@ public class ReservationDTO {
 		this.uneVoiture.setImmatriculation(reservation.getUneVoiture().getImmatriculation());
 		this.uneVoiture.setMarque(reservation.getUneVoiture().getMarque());
 		this.uneVoiture.setModele(reservation.getUneVoiture().getModele());
-		
+		this.uneVoiture.setNbPlaces(reservation.getUneVoiture().getNbPlaces());
+		this.uneVoiture.setPhotoUrl(reservation.getUneVoiture().getPhotoUrl());
+		this.uneVoiture.setCategorie(reservation.getUneVoiture().getCategorie());
+		this.uneVoiture.setStatutVehicule(reservation.getUneVoiture().getStatutVehicule());
 		}
 	
 	
@@ -45,20 +48,12 @@ public class ReservationDTO {
 		this.dateDeRetour = dateDeRetour;
 	}
 
-
-
 	public VehiculeDTO getUneVoiture() {
 		return uneVoiture;
 	}
-
-
 
 	public void setUneVoiture(VehiculeDTO uneVoiture) {
 		this.uneVoiture = uneVoiture;
 	}
  
-	
-	
-	
-	
 }

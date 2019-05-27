@@ -79,10 +79,13 @@ public class VehiculeService {
 		return vehiculeDTO;
 	}
 
-	public Vehicule trouverVehiculeImmatriculation(String immatriculation) throws VehiculeNonTrouverException {
+	public VehiculeDTO trouverVehiculeImmatriculation(String immatriculation) throws VehiculeNonTrouverException {
 		Optional<Vehicule> vehicule = repo.findByImmatriculation(immatriculation);
+		VehiculeDTO vDTO;
+		
 		if (vehicule.isPresent()) {
-			return vehicule.get();
+			vDTO = new VehiculeDTO(vehicule.get());
+			return vDTO;
 		} else {
 			throw new VehiculeNonTrouverException("Le vehicule n'a pas été trouvé !");
 		}

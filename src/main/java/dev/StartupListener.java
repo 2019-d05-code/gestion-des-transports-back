@@ -1,6 +1,9 @@
 package dev;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -10,12 +13,14 @@ import org.springframework.stereotype.Component;
 
 import dev.domain.CategorieVehicule;
 import dev.domain.Collegue;
+import dev.domain.Reservation;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.StatutVehicule;
 import dev.domain.Vehicule;
 import dev.domain.Version;
 import dev.repository.CollegueRepo;
+import dev.repository.ReservationRepository;
 import dev.repository.VehiculeRepo;
 import dev.repository.VersionRepo;
 
@@ -30,14 +35,17 @@ public class StartupListener {
 	private PasswordEncoder passwordEncoder;
 	private CollegueRepo collegueRepo;
 	private VehiculeRepo vehiculeRepo;
+	private ReservationRepository reservationRepo;
 
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
-			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo) {
+			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo,
+			ReservationRepository reservationRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.collegueRepo = collegueRepo;
 		this.vehiculeRepo = vehiculeRepo;
+		this.reservationRepo = reservationRepo;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -86,6 +94,12 @@ public class StartupListener {
 
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
+		
+		Reservation res1 = new Reservation(LocalDateTime.of(2019, 05, 23, 12, 23), LocalDateTime.of(2019, 06, 01, 12, 23), auto1);
+		Reservation res2 = new Reservation(LocalDateTime.of(2019, 04, 21, 12, 23), LocalDateTime.of(2019, 05, 02, 12, 23), auto2);
+		this.reservationRepo.save(res1);
+		this.reservationRepo.save(res2);
+		
 	}
 
 
