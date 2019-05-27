@@ -3,12 +3,13 @@ package dev.controller.dto;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.domain.Annonce;
 
 public class AnnonceDTO {
 
-	private Long id;
-	private Long annonceurId;
+	private String annonceurEmail;
 	private String adressDepart;
 	private String adressArrivee;
 	private Duration duree;
@@ -22,12 +23,11 @@ public class AnnonceDTO {
 	public AnnonceDTO() {
 	}
 
-	public AnnonceDTO(Long id, Long annonceurId, String adressDepart, String adressArrivee, Duration duree,
+	public AnnonceDTO(String annonceurEmail, String adressDepart, String adressArrivee, Duration duree,
 			Float distance, LocalDateTime dateTimeDepart, String immatriculationVehicule, String marque, String modele,
 			Integer place) {
 		super();
-		this.id = id;
-		this.annonceurId = annonceurId;
+		this.annonceurEmail = annonceurEmail;
 		this.adressDepart = adressDepart;
 		this.adressArrivee = adressArrivee;
 		this.duree = duree;
@@ -39,20 +39,12 @@ public class AnnonceDTO {
 		this.place = place;
 	}
 
-	public Long getId() {
-		return id;
+	public String getAnnonceurEmail() {
+		return annonceurEmail;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getAnnonceurId() {
-		return annonceurId;
-	}
-
-	public void setAnnonceurId(Long annonceurId) {
-		this.annonceurId = annonceurId;
+	public void setAnnonceurEmail(String annonceurEmail) {
+		this.annonceurEmail = annonceurEmail;
 	}
 
 	public String getAdressDepart() {
@@ -94,7 +86,7 @@ public class AnnonceDTO {
 	public void setDateTimeDepart(LocalDateTime dateTimeDepart) {
 		this.dateTimeDepart = dateTimeDepart;
 	}
-	
+
 	public String getImmatriculationVehicule() {
 		return immatriculationVehicule;
 	}
@@ -128,8 +120,8 @@ public class AnnonceDTO {
 	}
 
 	public Annonce dtoToObject() {
-		Annonce annonce = new Annonce(null, adressDepart, adressArrivee, duree, distance, dateTimeDepart, immatriculationVehicule, marque, modele, place);
-		annonce.setId(id);
+		Annonce annonce = new Annonce(null, adressDepart, adressArrivee, duree, distance, dateTimeDepart,
+				immatriculationVehicule, marque, modele, place);
 		return annonce;
 	}
 
@@ -139,7 +131,7 @@ public class AnnonceDTO {
 		int result = 1;
 		result = prime * result + ((adressArrivee == null) ? 0 : adressArrivee.hashCode());
 		result = prime * result + ((adressDepart == null) ? 0 : adressDepart.hashCode());
-		result = prime * result + ((annonceurId == null) ? 0 : annonceurId.hashCode());
+		result = prime * result + ((annonceurEmail == null) ? 0 : annonceurEmail.hashCode());
 		result = prime * result + ((dateTimeDepart == null) ? 0 : dateTimeDepart.hashCode());
 		result = prime * result + ((distance == null) ? 0 : distance.hashCode());
 		result = prime * result + ((duree == null) ? 0 : duree.hashCode());
@@ -169,10 +161,10 @@ public class AnnonceDTO {
 				return false;
 		} else if (!adressDepart.equals(other.adressDepart))
 			return false;
-		if (annonceurId == null) {
-			if (other.annonceurId != null)
+		if (annonceurEmail == null) {
+			if (other.annonceurEmail != null)
 				return false;
-		} else if (!annonceurId.equals(other.annonceurId))
+		} else if (!annonceurEmail.equals(other.annonceurEmail))
 			return false;
 		if (dateTimeDepart == null) {
 			if (other.dateTimeDepart != null)

@@ -32,8 +32,8 @@ public class AnnonceService {
 	}
 
 	public AnnonceDTO creerAnnonce(AnnonceDTO dto) {
-		Long idAnnonceur = dto.getAnnonceurId();
-		Collegue annonceur = collegueRepo.findById(idAnnonceur)
+		String emailAnnonceur = dto.getAnnonceurEmail();
+		Collegue annonceur = collegueRepo.findByEmail(emailAnnonceur)
 				.orElseThrow(() -> new CollegueNonTrouveException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonceCree = new Annonce(annonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
 				dto.getDateTimeDepart(), dto.getImmatriculationVehicule(), dto.getMarque(), dto.getModele(),
@@ -42,7 +42,6 @@ public class AnnonceService {
 
 		// TODO: quand géolocalisation fonctionnelle => annonce et dto renvoyée
 		// devront être valorisés (distance, durée)
-		dto.setId(annonceCree.getId());
 		return dto;
 	}
 
