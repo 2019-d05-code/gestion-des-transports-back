@@ -54,22 +54,24 @@ public class AnnonceServiceTest {
 		admin.getRoles().add(new RoleCollegue(utilisateur, Role.ROLE_ADMINISTRATEUR));
 
 		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
-				LocalDateTime.of(2019, 01, 01, 14, 00), 3);
+				LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot", "Twingo", 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDTO(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
-				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 1, 1, 14, 0), 3);
+		annonceDto = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs",
+				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 1, 1, 14, 0), "FF-666-FF", "Peugeot", "Twingo",
+				3);
 	}
 
 	@Test
 	public void test_creer_annonce_OK() throws EmptyRepositoryException {
 
 		annonce.setAnnonceur(utilisateur);
-		Mockito.when(collegueRepo.findById(annonce.getAnnonceur().getId())).thenReturn(Optional.of(utilisateur));
+		Mockito.when(collegueRepo.findByEmail(annonce.getAnnonceur().getEmail())).thenReturn(Optional.of(utilisateur));
 		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
 
 		AnnonceDTO actual = annonceService.creerAnnonce(annonceDto);
-		AnnonceDTO expected = new AnnonceDTO(annonce.getId(), utilisateur.getId(), "42 rue des utilisateurs",
-				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), 3);
+		AnnonceDTO expected = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs",
+				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot",
+				"Twingo", 3);
 
 		Assert.assertEquals(expected, actual);
 	}
