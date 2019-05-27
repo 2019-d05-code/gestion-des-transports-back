@@ -17,5 +17,9 @@ public class RestResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> gereCollegueDejaChauffeurException(RuntimeException ex, WebRequest request) {
 		return ResponseEntity.status(404).body(ex.getMessage());
 	}
-  
+
+	@ExceptionHandler(value = { VehiculeNonTrouverException.class })
+	protected ResponseEntity<Object> VehiculeNonTrouverException(RuntimeException ex, WebRequest request) {
+		return ResponseEntity.status(404).body(ex.getMessage());
+	}
 }

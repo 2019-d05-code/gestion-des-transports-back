@@ -1,5 +1,9 @@
 package dev.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CategorieVehicule {
 
 	MICRO_URBAINES("Micro-urbaines"),
@@ -23,4 +27,13 @@ public enum CategorieVehicule {
 
 	}
 
+	@JsonValue
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
 }
