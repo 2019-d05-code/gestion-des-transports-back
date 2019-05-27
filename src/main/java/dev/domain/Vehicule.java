@@ -1,18 +1,21 @@
 package dev.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Vehicule {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	private String marque;
 	private String modele;
 	@Enumerated(EnumType.STRING)
@@ -22,9 +25,17 @@ public class Vehicule {
 	private Integer nbPlaces;
 	@Enumerated(EnumType.STRING)
 	private StatutVehicule statutVehicule;
+  
+  @OneToMany(mappedBy = "uneVoiture")
+	List<Reservation> listeDeReservations; 
 
 	public Vehicule() {
 		this.statutVehicule = StatutVehicule.EN_SERVICE;
+	}
+  
+  public Vehicule(int id) {
+		super();
+		this.id = id;
 	}
 
 	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl,
@@ -51,11 +62,11 @@ public class Vehicule {
 		this.statutVehicule = statutVehicule;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -64,7 +75,10 @@ public class Vehicule {
 	}
 
 	public void setMarque(String marque) {
+
 		this.marque = marque;
+
+		this.marque = marque.toUpperCase();
 	}
 
 	public String getModele() {
@@ -73,6 +87,7 @@ public class Vehicule {
 
 	public void setModele(String modele) {
 		this.modele = modele;
+
 	}
 
 	public String getImmatriculation() {
@@ -80,7 +95,9 @@ public class Vehicule {
 	}
 
 	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation;
+
+		this.immatriculation = immatriculation.toUpperCase();
+
 	}
 
 	public String getPhotoUrl() {
@@ -89,7 +106,10 @@ public class Vehicule {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
-	}
+
+}
+
+	
 
 	public Integer getNbPlaces() {
 		return nbPlaces;
@@ -125,6 +145,14 @@ public class Vehicule {
 	 */
 	public void setStatutVehicule(StatutVehicule statutVehicule) {
 		this.statutVehicule = statutVehicule;
+	}
+
+  public List<Reservation> getListeDeReservations() {
+		return listeDeReservations;
+	}
+
+	public void setListeDeReservations(List<Reservation> listeDeReservations) {
+		this.listeDeReservations = listeDeReservations;
 	}
 
 }

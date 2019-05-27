@@ -23,6 +23,8 @@ public enum CategorieVehicule {
 	
 	public String toString() {
 		return nom;
+
+
 	}
 
 	@JsonValue

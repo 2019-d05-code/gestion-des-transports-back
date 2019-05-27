@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import dev.controller.dto.ModifierStatutVehiculeDTO;
 import dev.domain.StatutVehicule;
+import dev.controller.dto.VehiculeDTO;
 import dev.domain.Vehicule;
 import dev.exception.BadArgumentsException;
 import dev.exception.EmptyRepositoryException;
@@ -22,15 +24,19 @@ public class VehiculeService {
 	@Autowired
 	VehiculeRepo repo;
 
-	public List<Vehicule> listerVehicules() throws EmptyRepositoryException {
-
-		List<Vehicule> resultat = new ArrayList<>();
-
-		if (repo.findAll().isEmpty() || repo.findAll() == null) {
+	
+	public List<VehiculeDTO> listerVehicules() throws EmptyRepositoryException {
+		
+		List<VehiculeDTO> resultat = new ArrayList<>();
+		List<Vehicule> vehiculeTrouve = repo.findAll();
+		
+		if(vehiculeTrouve.isEmpty() || vehiculeTrouve == null) {
 			throw new EmptyRepositoryException("Il n'y a aucun véhicule enregistré dans la base de données");
-		} else {
-			for (Vehicule vehicule : repo.findAll()) {
-				resultat.add(vehicule);
+		}else {
+			for(Vehicule vehicule:vehiculeTrouve) {
+				
+				VehiculeDTO vehiculedto = new VehiculeDTO(vehicule); 
+				resultat.add(vehiculedto);
 			}
 			return resultat;
 		}

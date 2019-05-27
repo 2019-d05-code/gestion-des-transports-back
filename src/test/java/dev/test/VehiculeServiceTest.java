@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 
 import dev.domain.CategorieVehicule;
 import dev.domain.Vehicule;
+
 import dev.exception.BadArgumentsException;
 import dev.exception.VehiculeNonTrouverException;
 import dev.repository.VehiculeRepo;

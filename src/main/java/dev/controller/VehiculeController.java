@@ -1,5 +1,7 @@
 package dev.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,7 @@ public class VehiculeController {
 	public ResponseEntity<?> listeVehicules() throws EmptyRepositoryException {
 
 		return ResponseEntity.ok(service.listerVehicules());
-
+    
 	}
 
 	@PostMapping(value = "/admin/vehicules")
@@ -47,6 +49,7 @@ public class VehiculeController {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 	}
 
+
 	@PatchMapping(value = "admin/vehicules/{immatriculation}")
 	public ResponseEntity<ModifierStatutVehiculeDTO> modifierStatusVehicule(
 			@RequestBody ModifierStatutVehiculeDTO ModifierStatutVehiculeDTO) {
@@ -61,3 +64,4 @@ public class VehiculeController {
 	}
 
 }
+

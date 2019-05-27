@@ -84,7 +84,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/admin/vehicules").permitAll()
 				.antMatchers(HttpMethod.POST, "/admin/vehicules").permitAll()
 				.antMatchers("/admin/**").permitAll()
-				.anyRequest().authenticated().and().headers().frameOptions().disable().and()
+
+				.anyRequest().authenticated()
+        .and().headers().frameOptions().disable()
+        .and()
 				// génération d'un formulaire de login
 				// il faut produire une requête avec les caractéristiques suivantes :
 				// POST /login
