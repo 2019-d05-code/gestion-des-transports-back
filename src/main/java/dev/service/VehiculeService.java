@@ -34,7 +34,7 @@ public class VehiculeService {
 			}
 			return resultat;
 		}
-
+    
 	}
 
 	public Vehicule ajouterVehicule(Vehicule vehicule) throws BadArgumentsException {

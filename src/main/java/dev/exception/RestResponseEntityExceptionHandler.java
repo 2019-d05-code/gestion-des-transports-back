@@ -9,15 +9,13 @@ import org.springframework.web.context.request.WebRequest;
 public class RestResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = { CollegueNonTrouveException.class })
-	protected ResponseEntity<Object> handleConflict1(RuntimeException ex, WebRequest request) {
-		String bodyOfResponse = "Collegue non trouvé";
-		return ResponseEntity.status(404).body(bodyOfResponse);
+	protected ResponseEntity<Object> gereCollegueNonTrouveException(RuntimeException ex, WebRequest request) {
+		return ResponseEntity.status(404).body(ex.getMessage());
 	}
 
 	@ExceptionHandler(value = { CollegueDejaChauffeurException.class })
-	protected ResponseEntity<Object> handleConflict2(RuntimeException ex, WebRequest request) {
-		String bodyOfResponse = "Le Collegue a déjà le role de chauffeur";
-		return ResponseEntity.status(404).body(bodyOfResponse);
+	protected ResponseEntity<Object> gereCollegueDejaChauffeurException(RuntimeException ex, WebRequest request) {
+		return ResponseEntity.status(404).body(ex.getMessage());
 	}
 
 	@ExceptionHandler(value = { VehiculeNonTrouverException.class })

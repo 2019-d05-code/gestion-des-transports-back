@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -30,6 +31,24 @@ public class Collegue {
 
 	@OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
 	private List<RoleCollegue> roles;
+
+	@OneToMany
+	@JoinColumn(name = "annonceur_id")
+	private List<Annonce> annonces;
+
+	public Collegue() {
+	}
+
+	public Collegue(String nom, String prenom, String email, String motDePasse, List<RoleCollegue> roles,
+			List<Annonce> annonces) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.roles = roles;
+		this.annonces = annonces;
+	}
 
 	public Long getId() {
 		return id;
@@ -87,7 +106,8 @@ public class Collegue {
 	}
 
 	/**
-	 * @param permis the permis to set
+	 * @param permis
+	 *            the permis to set
 	 */
 	public void setPermis(String permis) {
 		this.permis = permis;
@@ -101,9 +121,19 @@ public class Collegue {
 	}
 
 	/**
-	 * @param telephone the telephone to set
+	 * @param telephone
+	 *            the telephone to set
+
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+  
+  public List<Annonce> getAnnonces() {
+		return annonces;
+	}
+
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
 	}
 }

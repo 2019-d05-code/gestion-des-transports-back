@@ -18,15 +18,17 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
+ * 
  * Configuration Spring Security.
+ * 
  */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${jwt.cookie}")
 	private String TOKEN_COOKIE;
-
 	private JWTAuthenticationSuccessHandler jwtAuthenticationSuccessHandler;
 
 	private JWTAuthorizationFilter jwtAuthorizationFilter;
