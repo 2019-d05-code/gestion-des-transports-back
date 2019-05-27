@@ -28,10 +28,13 @@ public class Reservation {
 	@JoinColumn(name = "id_vehicule")
 	private Vehicule uneVoiture; 
 	
+	private String vehiculeImmatriculation;
+	
 	
 
 	public Reservation() {
 		super();	
+		
 	}
 
 
@@ -41,6 +44,7 @@ public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDe
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
+		this.vehiculeImmatriculation = uneVoiture.getImmatriculation();
 	}
 
 
@@ -49,6 +53,7 @@ public Reservation( LocalDateTime dateDeReservation, LocalDateTime dateDeRetour,
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
+		this.vehiculeImmatriculation = uneVoiture.getImmatriculation();
 	}
 
 	public Vehicule getUneVoiture() {
@@ -78,6 +83,15 @@ public Reservation( LocalDateTime dateDeReservation, LocalDateTime dateDeRetour,
 		this.dateDeRetour = dateDeRetour;
 	}
 
+
+	public String getVehiculeImmatriculation() {
+		return vehiculeImmatriculation;
+	}
+
+
+	public void setVehiculeImmatriculation(String vehiculeImmatriculation) {
+		this.vehiculeImmatriculation = vehiculeImmatriculation;
+	}
 	
 
 }

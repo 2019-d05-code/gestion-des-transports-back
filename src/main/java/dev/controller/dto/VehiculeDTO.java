@@ -1,7 +1,16 @@
 package dev.controller.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import dev.domain.CategorieVehicule;
+import dev.domain.Reservation;
+import dev.domain.StatutVehicule;
 import dev.domain.Vehicule;
+import dev.exception.EmptyRepositoryException;
+import dev.service.ReservationService;
 
 public class VehiculeDTO {
 
@@ -12,7 +21,9 @@ public class VehiculeDTO {
 	private CategorieVehicule categorie;
 	private String photoUrl;
 	private Integer nbPlaces;
+	private StatutVehicule statutVehicule;
 	
+	private List<ReservationDTO> resaVehicule = new ArrayList<ReservationDTO>(); 
 	
 	public VehiculeDTO() {
 		super();
@@ -28,6 +39,15 @@ public class VehiculeDTO {
 		this.categorie=vehicule.getCategorie(); 
 		this.photoUrl = vehicule.getPhotoUrl(); 
 		this.nbPlaces = vehicule.getNbPlaces(); 
+		this.statutVehicule = vehicule.getStatutVehicule();
+		
+		List<ReservationDTO> tmp = new ArrayList<ReservationDTO>();
+		
+		for(Reservation res:vehicule.getListeDeReservations()) {
+			tmp.add(new ReservationDTO(res));
+		}
+		this.resaVehicule = tmp;
+		
 	}
 
 
@@ -85,6 +105,26 @@ public class VehiculeDTO {
 	public void setImmatriculation(String immatriculation) {
 		this.immatriculation = immatriculation;
 	}
-	
+
+
+	public List<ReservationDTO> getResaVehicule() {
+		return resaVehicule;
+	}
+
+
+	public void setResaVehicule(List<ReservationDTO> resaVehicule) {
+		this.resaVehicule = resaVehicule;
+	}
+
+
+	public StatutVehicule getStatutVehicule() {
+		return statutVehicule;
+	}
+
+
+	public void setStatutVehicule(StatutVehicule statutVehicule) {
+		this.statutVehicule = statutVehicule;
+	}
+
 	
 }
