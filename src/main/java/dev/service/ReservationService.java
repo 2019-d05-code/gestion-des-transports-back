@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ReservationDTO;
 import dev.domain.Reservation;
+import dev.domain.StatutVehicule;
 import dev.exception.EmptyRepositoryException;
 import dev.exception.ReservationInvalideException;
 import dev.repository.ReservationRepository;
@@ -47,6 +48,10 @@ public class ReservationService {
 	
 	public Reservation ajouterReservation(Reservation reservation) throws ReservationInvalideException {
 		
+		
+		if(reservation.getUneVoiture().getStatutVehicule() != StatutVehicule.EN_SERVICE) {
+			throw new ReservationInvalideException("Le véhicule séletionné n'est actuellement pas en service");
+		}
 		if(reservation.getDateDeReservation()==null || reservation.getDateDeRetour() ==null) {	
 			throw new ReservationInvalideException("on ne peut pas ajouter cette réservation"); 
 		}else {
