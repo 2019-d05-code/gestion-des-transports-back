@@ -36,6 +36,7 @@ public class Vehicule {
   public Vehicule(int id) {
 		super();
 		this.id = id;
+		this.statutVehicule = StatutVehicule.EN_SERVICE;
 	}
 
 	public Vehicule(String marque, String modele, CategorieVehicule categorie, String immatriculation, String photoUrl,
