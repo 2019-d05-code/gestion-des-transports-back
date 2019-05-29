@@ -61,6 +61,7 @@ public class StartupListener {
 		col1.setTelephone("0645582546");
 		col1.setEmail("admin@dev.fr");
 		col1.setMotDePasse(passwordEncoder.encode("superpass"));
+		col1.setPhotoUrl("https://mastodon.cemea.org/system/media_attachments/files/000/000/533/original/a374492e3aa2ccf7.jpg?1493201585");
 		col1.setRoles(Arrays.asList(new RoleCollegue(col1, Role.ROLE_ADMINISTRATEUR),
 				new RoleCollegue(col1, Role.ROLE_UTILISATEUR)));
 		this.collegueRepo.save(col1);
@@ -72,6 +73,7 @@ public class StartupListener {
 		col2.setPermis("16546FEFGGG155");
 		col2.setTelephone("0645583484");
 		col2.setMotDePasse(passwordEncoder.encode("superpass"));
+		col2.setPhotoUrl("http://www.onenagros.org/wordpress/wp-content/uploads/persos/Merlin.jpg");
 		col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
 		this.collegueRepo.save(col2);
 
@@ -87,6 +89,7 @@ public class StartupListener {
 
 		col3.setPermis("16546FEFGGG666");
 		col3.setTelephone("0633445566");
+		col3.setPhotoUrl("https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
 		col3.setMotDePasse(passwordEncoder.encode("superpass"));
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_CHAUFFEUR),
 				new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));

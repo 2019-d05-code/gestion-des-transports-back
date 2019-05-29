@@ -45,11 +45,11 @@ public class AnnonceServiceTest {
 		annonceService = new AnnonceService(annonceRepo, collegueRepo);
 
 		utilisateur = new Collegue("nomU", "prenomU", "password", "utilisateur@utilisateur.com", new ArrayList<>(),
-				new ArrayList<>());
+				new ArrayList<>(), "https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
 		utilisateur.setId(42L);
 		utilisateur.getRoles().add(new RoleCollegue(utilisateur, Role.ROLE_UTILISATEUR));
 
-		admin = new Collegue("nomA", "prenomA", "12345", "admin@admin.com", new ArrayList<>(), new ArrayList<>());
+		admin = new Collegue("nomA", "prenomA", "12345", "admin@admin.com", new ArrayList<>(), new ArrayList<>(), "https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
 		admin.setId(43L);
 		admin.getRoles().add(new RoleCollegue(utilisateur, Role.ROLE_ADMINISTRATEUR));
 
