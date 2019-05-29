@@ -1,5 +1,6 @@
 package dev;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import dev.domain.Annonce;
 import dev.domain.CategorieVehicule;
 import dev.domain.Collegue;
 import dev.domain.Reservation;
@@ -21,6 +23,7 @@ import dev.domain.RoleCollegue;
 import dev.domain.StatutVehicule;
 import dev.domain.Vehicule;
 import dev.domain.Version;
+import dev.repository.AnnonceRepo;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationRepository;
 import dev.repository.VehiculeRepo;
@@ -38,16 +41,18 @@ public class StartupListener {
 	private CollegueRepo collegueRepo;
 	private VehiculeRepo vehiculeRepo;
 	private ReservationRepository reservationRepo;
+	private AnnonceRepo annonceRepo;
 
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
 			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo,
-			ReservationRepository reservationRepo) {
+			ReservationRepository reservationRepo, AnnonceRepo annonceRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.collegueRepo = collegueRepo;
 		this.vehiculeRepo = vehiculeRepo;
 		this.reservationRepo = reservationRepo;
+		this.annonceRepo = annonceRepo;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -80,7 +85,8 @@ public class StartupListener {
 		Vehicule auto1 = new Vehicule("Opel", "kadettE", CategorieVehicule.BERLINES_TAILLE_S, "JS-123-GH",
 				"https://static3.car.gr/14598250_0_z.jpg", 4, StatutVehicule.EN_SERVICE);
 		Vehicule auto2 = new Vehicule("Peugeot", "806", CategorieVehicule.BERLINES_TAILLE_L, "CR-456-UU",
-				"https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7, StatutVehicule.HORS_SERVICE);
+				"https://ouicar.s3-eu-west-1.amazonaws.com/uploads/product/16516/1651459.jpg", 7,
+				StatutVehicule.HORS_SERVICE);
 
 		Collegue col3 = new Collegue();
 		col3.setNom("Chauffeur");
@@ -96,19 +102,39 @@ public class StartupListener {
 
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
-		
 
-		Reservation uneReservation = new Reservation(LocalDateTime.now(), LocalDateTime.now(),new Vehicule(1),col3, true); 
-		Reservation uneReservation2 = new Reservation(LocalDateTime.now(), LocalDateTime.now(),new Vehicule(2), null, false); 
-		Reservation uneReservation3 = new Reservation(LocalDateTime.now(), LocalDateTime.of(2019, 06, 11, 15, 30),new Vehicule(1),null, true); 
+		Reservation uneReservation = new Reservation(LocalDateTime.now(), LocalDateTime.now(), new Vehicule(1), col3,
+				true);
+		Reservation uneReservation2 = new Reservation(LocalDateTime.now(), LocalDateTime.now(), new Vehicule(2), null,
+				false);
+		Reservation uneReservation3 = new Reservation(LocalDateTime.now(), LocalDateTime.of(2019, 06, 11, 15, 30),
+				new Vehicule(1), null, true);
 		this.reservationRepo.save(uneReservation);
 		this.reservationRepo.save(uneReservation2);
-		this.reservationRepo.save(uneReservation3); 
-		
+		this.reservationRepo.save(uneReservation3);
 
-		
+		Annonce annonce1 = new Annonce(col1, "1 rue James Webb", "2 rue Kepler", Duration.ofHours(2), 300F,
+				LocalDateTime.of(2019, 12, 15, 8, 0), "FF-666-FF", "Peugeot", "Twingo", 3);
+		Annonce annonce2 = new Annonce(col1, "18 avenue Margoulin", "7 rue James Webb",
+				Duration.ofHours(1).plusMinutes(10), 110F, LocalDateTime.of(2018, 9, 25, 10, 50), "FR-313-DF",
+				"Renault", "Scenic 4", 3);
+		Annonce annonce3 = new Annonce(col1, "42 avenue Margoulin", "21 allée Fleurie",
+				Duration.ofHours(2).plusMinutes(10), 350F, LocalDateTime.of(2018, 2, 25, 14, 30), "FF-888-FF",
+				"Citroën", "C4", 1);
+		Annonce annonce4 = new Annonce(col1, "42 avenue Margoulin", "21 allée Fleurie",
+				Duration.ofHours(2).plusMinutes(10), 350F, LocalDateTime.of(2017, 5, 4, 15, 0), "FF-888-FF", "Citroën",
+				"C4", 1);
+		Annonce annonce5 = new Annonce(col1, "21 allée Fleurie", "42 avenue Margoulin",
+				Duration.ofHours(2).plusMinutes(10), 350F, LocalDateTime.of(2017, 3, 20, 9, 0), "FF-888-FF", "Citroën",
+				"C4", 1);
+		Annonce annonce6 = new Annonce(col1, "2 rue Kepler", "1 rue James Webb", Duration.ofHours(2), 300F,
+				LocalDateTime.of(2016, 6, 1, 7, 50), "GD-564-ME", "Renault", "Scenic 4", 3);
+		this.annonceRepo.save(annonce1);
+		this.annonceRepo.save(annonce2);
+		this.annonceRepo.save(annonce3);
+		this.annonceRepo.save(annonce4);
+		this.annonceRepo.save(annonce5);
+		this.annonceRepo.save(annonce6);
 	}
 
-
-    }
-
+}

@@ -1,10 +1,9 @@
 package dev.service;
 
-import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.AnnonceDTO;
@@ -51,5 +50,16 @@ public class AnnonceService {
 
 	
 	
+
+	public List<AnnonceDTO> listerSesAnnonces(String emailAnnonceur) throws EmptyRepositoryException {
+		List<Annonce> annonces = annonceRepo.findByAnnonceurEmail(emailAnnonceur)
+				.orElseThrow(() -> new EmptyRepositoryException("Aucune annonce n'a été retrouvée"));
+		return annonces.stream()
+				.map(annonce -> new AnnonceDTO(annonce.getAnnonceur().getEmail(), annonce.getAdressDepart(),
+						annonce.getAdressArrivee(), annonce.getDuree(), annonce.getDistance(),
+						annonce.getDateTimeDepart(), annonce.getImmatriculationVehicule(), annonce.getMarque(),
+						annonce.getModele(), annonce.getPlace()))
+				.collect(Collectors.toList());
+	}
 
 }
