@@ -37,10 +37,13 @@ public class Collegue {
 	@OneToMany
 	@JoinColumn(name = "annonceur_id")
 	private List<Annonce> annonces;
+	
+	@OneToMany(mappedBy = "unChauffeur")
+	private List<Reservation> listesDeReservations; 
 
 	public Collegue() {
 	}
-
+	
 	public Collegue(String nom, String prenom, String email, String motDePasse, List<RoleCollegue> roles,
 			List<Annonce> annonces) {
 		super();
@@ -51,6 +54,12 @@ public class Collegue {
 		this.roles = roles;
 		this.annonces = annonces;
 	}
+
+	public Collegue(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+	
 
 	public Long getId() {
 		return id;

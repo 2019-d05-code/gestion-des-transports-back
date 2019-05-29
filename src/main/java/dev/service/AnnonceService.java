@@ -1,10 +1,9 @@
 package dev.service;
 
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.AnnonceDTO;
@@ -47,6 +46,10 @@ public class AnnonceService {
 		// devront être valorisés (distance, durée)
 		return dto;
 	}
+	
+
+	
+	
 
 	public List<AnnonceDTO> listerSesAnnonces(String emailAnnonceur) throws EmptyRepositoryException {
 		List<Annonce> annonces = annonceRepo.findByAnnonceurEmail(emailAnnonceur)

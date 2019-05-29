@@ -31,6 +31,12 @@ public class CollegueDTO {
 		this.roles = col.getRoles().stream().map(roleCollegue -> roleCollegue.getRole()).collect(Collectors.toList());
 	}
 
+	public CollegueDTO(long id, String nom, String prenom) {
+		this.id = id; 
+		this.nom=nom; 
+		this.prenom=prenom; 
+	}
+
 	/**
 	 * @return the id
 	 */
