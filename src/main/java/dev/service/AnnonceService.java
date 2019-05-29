@@ -35,26 +35,27 @@ public class AnnonceService {
 	}
 
 	public AnnonceDTO creerAnnonce(AnnonceDTO dto) {
-		Long idAnnonceur = dto.getAnnonceurId();
-		Collegue annonceur = collegueRepo.findById(idAnnonceur)
+		String emailAnnonceur = dto.getAnnonceurEmail();
+		Collegue annonceur = collegueRepo.findByEmail(emailAnnonceur)
 				.orElseThrow(() -> new CollegueNonTrouveException("L'annonceur n'a pas été retrouvé"));
 		Annonce annonceCree = new Annonce(annonceur, dto.getAdressDepart(), dto.getAdressArrivee(), null, null,
-				dto.getDateTimeDepart(), dto.getPlace());
+				dto.getDateTimeDepart(), dto.getImmatriculationVehicule(), dto.getMarque(), dto.getModele(),
+				dto.getPlace());
 		annonceRepo.save(annonceCree);
 
 		// TODO: quand géolocalisation fonctionnelle => annonce et dto renvoyée
 		// devront être valorisés (distance, durée)
-		dto.setId(annonceCree.getId());
 		return dto;
 	}
 
 	public List<AnnonceDTO> listerSesAnnonces(String emailAnnonceur) throws EmptyRepositoryException {
-		List<Annonce> annonces = annonceRepo.trouveAnnoncesParEmailAnnonceur(emailAnnonceur)
+		List<Annonce> annonces = annonceRepo.findByAnnonceurEmail(emailAnnonceur)
 				.orElseThrow(() -> new EmptyRepositoryException("Aucune annonce n'a été retrouvée"));
 		return annonces.stream()
-				.map(annonce -> new AnnonceDTO(annonce.getId(), annonce.getAnnonceur().getId(),
-						annonce.getAdressDepart(), annonce.getAdressArrivee(), annonce.getDuree(),
-						annonce.getDistance(), annonce.getDateTimeDepart(), annonce.getPlace()))
+				.map(annonce -> new AnnonceDTO(annonce.getAnnonceur().getEmail(), annonce.getAdressDepart(),
+						annonce.getAdressArrivee(), annonce.getDuree(), annonce.getDistance(),
+						annonce.getDateTimeDepart(), annonce.getImmatriculationVehicule(), annonce.getMarque(),
+						annonce.getModele(), annonce.getPlace()))
 				.collect(Collectors.toList());
 	}
 

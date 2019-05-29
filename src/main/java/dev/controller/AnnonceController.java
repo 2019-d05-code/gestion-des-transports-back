@@ -1,5 +1,6 @@
 package dev.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,13 @@ public class AnnonceController {
 	}
 
 	@GetMapping("/liste")
-	public ResponseEntity<List<AnnonceDTO>> listerSesAnnonces(@RequestParam String emailAnnonceur)
-			throws EmptyRepositoryException {
-		List<AnnonceDTO> annoncesDTO = annonceService.listerSesAnnonces(emailAnnonceur);
+	public ResponseEntity<List<AnnonceDTO>> listerSesAnnonces(@RequestParam String email) {
+		List<AnnonceDTO> annoncesDTO;
+		try {
+			annoncesDTO = annonceService.listerSesAnnonces(email);
+		} catch (EmptyRepositoryException e) {
+			return ResponseEntity.ok(new ArrayList<AnnonceDTO>());
+		}
 		return ResponseEntity.ok(annoncesDTO);
 	}
 
