@@ -22,13 +22,13 @@ import dev.service.ReservationService;
 public class ReservationController {
 
 	@Autowired
-	private ReservationService res_ser; 
+	private ReservationService reservationServ; 
 	
 	//afficher toutes les réservations
 	@GetMapping(value="/collaborateur/reservations")
 	public List<ReservationDTO> afficherReservation(){
 		
-		return res_ser.afficherToutesLesReservations(); 
+		return reservationServ.afficherToutesLesReservations(); 
 	}
 	
 	
@@ -37,7 +37,7 @@ public class ReservationController {
 	@PostMapping(value = "/collaborateur/reservations/creer")
 	public Reservation create(@RequestBody Reservation reservation) throws ReservationInvalideException {
 
-		Reservation nouvelle = res_ser.ajouterReservation(reservation);
+		Reservation nouvelle = reservationServ.ajouterReservation(reservation);
 		
 		return nouvelle; 
 	}
@@ -45,7 +45,7 @@ public class ReservationController {
 	@GetMapping(value="/collaborateur/reservations/{immatriculation}")
 	public ResponseEntity<?> afficherReservationsVehicule(@PathVariable String immatriculation) throws EmptyRepositoryException {
 		
-		return ResponseEntity.ok(res_ser.afficherListeReservationVehicule(immatriculation));
+		return ResponseEntity.ok(reservationServ.afficherListeReservationVehicule(immatriculation));
 		
 	}
 	

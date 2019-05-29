@@ -2,9 +2,11 @@ package dev;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -95,10 +97,15 @@ public class StartupListener {
 		this.vehiculeRepo.save(auto1);
 		this.vehiculeRepo.save(auto2);
 		
-		Reservation res1 = new Reservation(LocalDateTime.of(2019, 05, 23, 12, 23), LocalDateTime.of(2019, 06, 01, 12, 23), auto1);
-		Reservation res2 = new Reservation(LocalDateTime.of(2019, 04, 21, 12, 23), LocalDateTime.of(2019, 05, 02, 12, 23), auto2);
-		this.reservationRepo.save(res1);
-		this.reservationRepo.save(res2);
+
+		Reservation uneReservation = new Reservation(LocalDateTime.now(), LocalDateTime.now(),new Vehicule(1),col3, true); 
+		Reservation uneReservation2 = new Reservation(LocalDateTime.now(), LocalDateTime.now(),new Vehicule(2), null, false); 
+		Reservation uneReservation3 = new Reservation(LocalDateTime.now(), LocalDateTime.of(2019, 06, 11, 15, 30),new Vehicule(1),null, true); 
+		this.reservationRepo.save(uneReservation);
+		this.reservationRepo.save(uneReservation2);
+		this.reservationRepo.save(uneReservation3); 
+		
+
 		
 	}
 

@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.service.AnnonceService;
 import dev.controller.dto.AnnonceDTO;
 import dev.exception.CollegueNonTrouveException;
 import dev.exception.EmptyRepositoryException;
+import dev.service.AnnonceService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/annonce")
+@RequestMapping
 public class AnnonceController {
 
 	@Autowired
 	private AnnonceService annonceService;
 
-	@PostMapping("/creer")
+	@PostMapping("/annonce/creer")
 	public ResponseEntity<AnnonceDTO> creerAnnonce(@RequestBody AnnonceDTO annonceDTO) throws EmptyRepositoryException {
 		AnnonceDTO annonceDTOCree = annonceService.creerAnnonce(annonceDTO);
 		return ResponseEntity.ok(annonceDTOCree);
@@ -38,5 +38,7 @@ public class AnnonceController {
 	public ResponseEntity<String> gereEmptyRepositoryException(CollegueNonTrouveException cnte) {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(cnte.getMessage());
 	}
+	
+
 
 }

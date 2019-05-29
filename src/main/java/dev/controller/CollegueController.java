@@ -16,6 +16,8 @@ import dev.service.CollegueService;
 @RestController
 public class CollegueController {
 
+	
+	
 	@Autowired
 	CollegueService collegueService;
 

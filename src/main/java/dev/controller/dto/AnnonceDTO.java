@@ -19,6 +19,7 @@ public class AnnonceDTO {
 	private String marque;
 	private String modele;
 	private Integer place;
+	
 
 	public AnnonceDTO() {
 	}
