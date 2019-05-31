@@ -1,8 +1,8 @@
 package dev.service;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +19,6 @@ import dev.domain.Annonce;
 import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
-import dev.domain.Vehicule;
 import dev.exception.CollegueNonTrouveException;
 import dev.exception.EmptyRepositoryException;
 import dev.repository.AnnonceRepo;
@@ -46,6 +45,7 @@ public class AnnonceServiceTest {
 
 		utilisateur = new Collegue("nomU", "prenomU", "password", "utilisateur@utilisateur.com", new ArrayList<>(),
 				new ArrayList<>(), "https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
+
 		utilisateur.setId(42L);
 		utilisateur.getRoles().add(new RoleCollegue(utilisateur, Role.ROLE_UTILISATEUR));
 
@@ -56,9 +56,8 @@ public class AnnonceServiceTest {
 		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
 				LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot", "Twingo", 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs",
-				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 1, 1, 14, 0), "FF-666-FF", "Peugeot", "Twingo",
-				3);
+		annonceDto = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs", "10 rue des arrivee", null, null,
+				LocalDateTime.of(2019, 1, 1, 14, 0), "FF-666-FF", "Peugeot", "Twingo", 3);
 	}
 
 	@Test
@@ -69,9 +68,8 @@ public class AnnonceServiceTest {
 		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
 
 		AnnonceDTO actual = annonceService.creerAnnonce(annonceDto);
-		AnnonceDTO expected = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs",
-				"10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot",
-				"Twingo", 3);
+		AnnonceDTO expected = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs", "10 rue des arrivee",
+				null, null, LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot", "Twingo", 3);
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -87,6 +85,37 @@ public class AnnonceServiceTest {
 
 		expectedException.expect(UsernameNotFoundException.class);
 		expectedException.expectMessage("L'annonceur n'a pas été retrouvé");
+	}
+
+	@Test
+	public void test_lister_ses_annonces_OK() throws EmptyRepositoryException {
+
+		String emailAnnonceur = annonceDto.getAnnonceurEmail();
+		Annonce annonceALister = annonceDto.dtoToObject();
+		annonceALister.setAnnonceur(utilisateur);
+
+		Mockito.when(annonceRepo.findByAnnonceurEmail(emailAnnonceur))
+				.thenReturn(Optional.of(Arrays.asList(annonceALister)));
+		List<AnnonceDTO> actual = annonceService.listerSesAnnonces(emailAnnonceur);
+		List<AnnonceDTO> expected = Arrays.asList(annonceDto);
+
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void test_lister_ses_annonces_KO_car_aucune_annonce_de_ce_collegue() throws EmptyRepositoryException {
+
+		expectedException.expect(EmptyRepositoryException.class);
+		expectedException.expectMessage("Aucune annonce n'a été retrouvée");
+
+		String emailAnnonceur = annonceDto.getAnnonceurEmail();
+		Annonce annonceALister = annonceDto.dtoToObject();
+		annonceALister.setAnnonceur(utilisateur);
+
+		List<AnnonceDTO> actual = annonceService.listerSesAnnonces(emailAnnonceur);
+		List<AnnonceDTO> expected = Arrays.asList(annonceDto);
+
+		Assert.assertEquals(expected, actual);
 	}
 
 }

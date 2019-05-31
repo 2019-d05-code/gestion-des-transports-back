@@ -2,6 +2,7 @@ package dev.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,41 @@ public class Reservation {
 	@JoinColumn(name = "id_vehicule")
 	private Vehicule uneVoiture; 
 	
+	@ManyToOne
+	@JoinColumn(name = "id_chauffeur")
+	private Collegue unChauffeur; 
+	
+	
+	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture,
+			Collegue unChauffeur, boolean avecOuSansChauffeur) {
+		super();
+		this.dateDeReservation = dateDeReservation;
+		this.dateDeRetour = dateDeRetour;
+		this.uneVoiture = uneVoiture;
+		this.unChauffeur = unChauffeur;
+		this.avecOuSansChauffeur = avecOuSansChauffeur;
+	}
+	private boolean avecOuSansChauffeur; 
+	
+	public boolean isAvecOuSansChauffeur() {
+		return avecOuSansChauffeur;
+	}
+
+	public void setAvecOuSansChauffeur(boolean avecOuSansChauffeur) {
+		this.avecOuSansChauffeur = avecOuSansChauffeur;
+	}
+
+
+	public Collegue getUnChauffeur() {
+		return unChauffeur;
+	}
+
+
+	public void setUnChauffeur(Collegue unChauffeur) {
+		this.unChauffeur = unChauffeur;
+	}
+
+
 	private String vehiculeImmatriculation;
 	
 	

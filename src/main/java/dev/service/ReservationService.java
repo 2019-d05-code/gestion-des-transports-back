@@ -48,13 +48,15 @@ public class ReservationService {
 		
 		if(reservation.getUneVoiture().getStatutVehicule() != StatutVehicule.EN_SERVICE) {
 			throw new ReservationInvalideException("Le véhicule séletionné n'est actuellement pas en service");
-		}else if(reservation.getDateDeReservation()==null || reservation.getDateDeRetour() ==null) {	
-			throw new ReservationInvalideException("on ne peut pas ajouter cette réservation"); 
-		}else {
-		
-		reservationRepo.save(reservation); 
-		return reservation; }
-		
+
+		} else if (reservation.getDateDeReservation() == null || reservation.getDateDeRetour() == null) {
+			throw new ReservationInvalideException("on ne peut pas ajouter cette réservation");
+		} else {
+
+			reservationRepo.save(reservation);
+			return reservation;
+		}
+
 	}
 	
 	//afficher toutes les réservations 
