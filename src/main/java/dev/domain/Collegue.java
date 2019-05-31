@@ -30,6 +30,8 @@ public class Collegue {
 	private String permis;
 
 	private String telephone;
+	
+	private String photoUrl;
 
 	@OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
 	private List<RoleCollegue> roles;
@@ -43,9 +45,19 @@ public class Collegue {
 
 	public Collegue() {
 	}
-	
+
+	public Collegue(String nom, String prenom, String email, String motDePasse, String telephone, String photoUrl) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.telephone = telephone;
+		this.photoUrl = photoUrl;
+	}
+
 	public Collegue(String nom, String prenom, String email, String motDePasse, List<RoleCollegue> roles,
-			List<Annonce> annonces) {
+			List<Annonce> annonces, String photoUrl) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -53,6 +65,7 @@ public class Collegue {
 		this.motDePasse = motDePasse;
 		this.roles = roles;
 		this.annonces = annonces;
+		this.photoUrl = photoUrl;
 	}
 
 	public Collegue(String nom, String prenom) {
@@ -146,5 +159,13 @@ public class Collegue {
 
 	public void setAnnonces(List<Annonce> annonces) {
 		this.annonces = annonces;
+	}
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 }

@@ -19,7 +19,17 @@ public class CollegueDTO {
 	private String prenom;
 	private String permis;
 	private String telephone;
+	private String photoUrl;
 	private List<Role> roles = new ArrayList<>();
+
+	public CollegueDTO(String email, String nom, String prenom, String telephone, String photoUrl) {
+		super();
+		this.email = email;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.telephone = telephone;
+		this.photoUrl = photoUrl;
+	}
 
 	public CollegueDTO(Collegue col) {
 		this.id = col.getId();
@@ -28,6 +38,7 @@ public class CollegueDTO {
 		this.prenom = col.getPrenom();
 		this.permis = col.getPermis();
 		this.telephone = col.getTelephone();
+		this.photoUrl = col.getPhotoUrl();
 		this.roles = col.getRoles().stream().map(roleCollegue -> roleCollegue.getRole()).collect(Collectors.toList());
 	}
 
@@ -109,5 +120,13 @@ public class CollegueDTO {
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 }
