@@ -2,10 +2,7 @@ package dev;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +37,8 @@ public class StartupListener {
 	private PasswordEncoder passwordEncoder;
 	private CollegueRepo collegueRepo;
 	private VehiculeRepo vehiculeRepo;
+
+	@Autowired
 	private ReservationRepository reservationRepo;
 	private AnnonceRepo annonceRepo;
 
@@ -68,7 +67,8 @@ public class StartupListener {
 		col1.setTelephone("0645582546");
 		col1.setEmail("admin@dev.fr");
 		col1.setMotDePasse(passwordEncoder.encode("superpass"));
-		col1.setPhotoUrl("https://mastodon.cemea.org/system/media_attachments/files/000/000/533/original/a374492e3aa2ccf7.jpg?1493201585");
+		col1.setPhotoUrl(
+				"https://mastodon.cemea.org/system/media_attachments/files/000/000/533/original/a374492e3aa2ccf7.jpg?1493201585");
 		col1.setRoles(Arrays.asList(new RoleCollegue(col1, Role.ROLE_ADMINISTRATEUR),
 				new RoleCollegue(col1, Role.ROLE_UTILISATEUR)));
 		this.collegueRepo.save(col1);
@@ -80,8 +80,11 @@ public class StartupListener {
 		col2.setPermis("16546FEFGGG155");
 		col2.setTelephone("0645583484");
 		col2.setMotDePasse(passwordEncoder.encode("superpass"));
+
 		col2.setPhotoUrl("http://www.onenagros.org/wordpress/wp-content/uploads/persos/Merlin.jpg");
-		col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
+		col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR),
+				new RoleCollegue(col2, Role.ROLE_CHAUFFEUR)));
+
 		this.collegueRepo.save(col2);
 
 		Vehicule auto1 = new Vehicule("Opel", "kadettE", CategorieVehicule.BERLINES_TAILLE_S, "JS-123-GH",
@@ -97,7 +100,8 @@ public class StartupListener {
 
 		col3.setPermis("16546FEFGGG666");
 		col3.setTelephone("0633445566");
-		col3.setPhotoUrl("https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
+		col3.setPhotoUrl(
+				"https://vignette.wikia.nocookie.net/kaamelott-officiel/images/5/55/Visage_Yvain2.jpg/revision/latest?cb=20150102045252&path-prefix=fr");
 		col3.setMotDePasse(passwordEncoder.encode("superpass"));
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_CHAUFFEUR),
 				new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
@@ -115,6 +119,23 @@ public class StartupListener {
 		this.reservationRepo.save(uneReservation);
 		this.reservationRepo.save(uneReservation2);
 		this.reservationRepo.save(uneReservation3);
+
+		Reservation res1 = new Reservation(LocalDateTime.of(2019, 05, 23, 13, 00),
+				LocalDateTime.of(2019, 05, 23, 15, 00), auto1);
+		Reservation res2 = new Reservation(LocalDateTime.of(2019, 04, 21, 12, 23),
+				LocalDateTime.of(2019, 05, 02, 12, 25), auto2);
+		this.reservationRepo.save(res1);
+		this.reservationRepo.save(res2);
+
+		Reservation uneReservation0 = new Reservation(LocalDateTime.now(), LocalDateTime.now(), new Vehicule(1), col3,
+				true);
+		Reservation uneReservation02 = new Reservation(LocalDateTime.now(), LocalDateTime.now(), new Vehicule(2), null,
+				false);
+		Reservation uneReservation03 = new Reservation(LocalDateTime.now(), LocalDateTime.of(2019, 06, 11, 15, 30),
+				new Vehicule(1), null, true);
+		this.reservationRepo.save(uneReservation0);
+		this.reservationRepo.save(uneReservation02);
+		this.reservationRepo.save(uneReservation03);
 
 		Annonce annonce1 = new Annonce(col1, "1 rue James Webb", "2 rue Kepler", Duration.ofHours(2), 300F,
 				LocalDateTime.of(2019, 12, 15, 8, 0), "FF-666-FF", "Peugeot", "Twingo", 3);
@@ -138,6 +159,7 @@ public class StartupListener {
 		this.annonceRepo.save(annonce4);
 		this.annonceRepo.save(annonce5);
 		this.annonceRepo.save(annonce6);
+
 	}
 
 }
