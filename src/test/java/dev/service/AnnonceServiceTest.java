@@ -56,8 +56,9 @@ public class AnnonceServiceTest {
 		annonce = new Annonce(null, "42 rue des utilisateurs", "10 rue des arrivee", null, null,
 				LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot", "Twingo", 3);
 		annonce.setId(42L);
-		annonceDto = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs", "10 rue des arrivee", null, null,
-				LocalDateTime.of(2019, 1, 1, 14, 0), "FF-666-FF", "Peugeot", "Twingo", 3);
+		annonceDto = new AnnonceDTO(utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(),
+				"42 rue des utilisateurs", "10 rue des arrivee", null, null, LocalDateTime.of(2019, 1, 1, 14, 0),
+				"FF-666-FF", "Peugeot", "Twingo", 3);
 	}
 
 	@Test
@@ -68,8 +69,9 @@ public class AnnonceServiceTest {
 		Mockito.when(annonceRepo.save(annonce)).thenReturn(annonce);
 
 		AnnonceDTO actual = annonceService.creerAnnonce(annonceDto);
-		AnnonceDTO expected = new AnnonceDTO(utilisateur.getEmail(), "42 rue des utilisateurs", "10 rue des arrivee",
-				null, null, LocalDateTime.of(2019, 01, 01, 14, 00), "FF-666-FF", "Peugeot", "Twingo", 3);
+		AnnonceDTO expected = new AnnonceDTO(utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(),
+				"42 rue des utilisateurs", "10 rue des arrivee", null, null, LocalDateTime.of(2019, 01, 01, 14, 00),
+				"FF-666-FF", "Peugeot", "Twingo", 3);
 
 		Assert.assertEquals(expected, actual);
 	}

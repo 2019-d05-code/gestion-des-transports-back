@@ -9,6 +9,8 @@ import dev.domain.Annonce;
 
 public class AnnonceDTO {
 
+	private String annonceurNom;
+	private String annonceurPrenom;
 	private String annonceurEmail;
 	private String adressDepart;
 	private String adressArrivee;
@@ -24,10 +26,12 @@ public class AnnonceDTO {
 	public AnnonceDTO() {
 	}
 
-	public AnnonceDTO(String annonceurEmail, String adressDepart, String adressArrivee, Duration duree,
+	public AnnonceDTO(String nom, String prenom, String annonceurEmail, String adressDepart, String adressArrivee, Duration duree,
 			Float distance, LocalDateTime dateTimeDepart, String immatriculationVehicule, String marque, String modele,
 			Integer place) {
 		super();
+		this.annonceurNom = nom;
+		this.annonceurPrenom = prenom;
 		this.annonceurEmail = annonceurEmail;
 		this.adressDepart = adressDepart;
 		this.adressArrivee = adressArrivee;
@@ -38,6 +42,24 @@ public class AnnonceDTO {
 		this.marque = marque;
 		this.modele = modele;
 		this.place = place;
+	}
+	
+	
+
+	public String getAnnonceurNom() {
+		return annonceurNom;
+	}
+
+	public void setAnnonceurNom(String annonceurNom) {
+		this.annonceurNom = annonceurNom;
+	}
+	
+	public String getAnnonceurPrenom() {
+		return annonceurPrenom;
+	}
+
+	public void setAnnonceurPrenom(String annonceurPrenom) {
+		this.annonceurPrenom = annonceurPrenom;
 	}
 
 	public String getAnnonceurEmail() {
@@ -133,6 +155,8 @@ public class AnnonceDTO {
 		result = prime * result + ((adressArrivee == null) ? 0 : adressArrivee.hashCode());
 		result = prime * result + ((adressDepart == null) ? 0 : adressDepart.hashCode());
 		result = prime * result + ((annonceurEmail == null) ? 0 : annonceurEmail.hashCode());
+		result = prime * result + ((annonceurNom == null) ? 0 : annonceurNom.hashCode());
+		result = prime * result + ((annonceurPrenom == null) ? 0 : annonceurPrenom.hashCode());
 		result = prime * result + ((dateTimeDepart == null) ? 0 : dateTimeDepart.hashCode());
 		result = prime * result + ((distance == null) ? 0 : distance.hashCode());
 		result = prime * result + ((duree == null) ? 0 : duree.hashCode());
@@ -166,6 +190,16 @@ public class AnnonceDTO {
 			if (other.annonceurEmail != null)
 				return false;
 		} else if (!annonceurEmail.equals(other.annonceurEmail))
+			return false;
+		if (annonceurNom == null) {
+			if (other.annonceurNom != null)
+				return false;
+		} else if (!annonceurNom.equals(other.annonceurNom))
+			return false;
+		if (annonceurPrenom == null) {
+			if (other.annonceurPrenom != null)
+				return false;
+		} else if (!annonceurPrenom.equals(other.annonceurPrenom))
 			return false;
 		if (dateTimeDepart == null) {
 			if (other.dateTimeDepart != null)
@@ -204,5 +238,7 @@ public class AnnonceDTO {
 			return false;
 		return true;
 	}
+
+	
 
 }

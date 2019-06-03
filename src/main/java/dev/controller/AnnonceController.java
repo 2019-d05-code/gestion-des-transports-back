@@ -22,13 +22,13 @@ import dev.service.AnnonceService;
 
 @RestController
 @CrossOrigin
-@RequestMapping
+@RequestMapping("/annonce")
 public class AnnonceController {
 
 	@Autowired
 	private AnnonceService annonceService;
 
-	@PostMapping("/annonce/creer")
+	@PostMapping("/creer")
 	public ResponseEntity<AnnonceDTO> creerAnnonce(@RequestBody AnnonceDTO annonceDTO) throws EmptyRepositoryException {
 		AnnonceDTO annonceDTOCree = annonceService.creerAnnonce(annonceDTO);
 		return ResponseEntity.ok(annonceDTOCree);
@@ -45,6 +45,17 @@ public class AnnonceController {
 		return ResponseEntity.ok(annoncesDTO);
 	}
 
+	@GetMapping("/liste/all-current")
+	public ResponseEntity<List<AnnonceDTO>> listerToutesAnnoncesEnCours() {
+		List<AnnonceDTO> annoncesDTO;
+		try {
+			annoncesDTO = annonceService.listerToutesAnnoncesEnCours();
+		} catch (EmptyRepositoryException e) {
+			return ResponseEntity.ok(new ArrayList<AnnonceDTO>());
+		}
+		return ResponseEntity.ok(annoncesDTO);
+	}
+
 	@ExceptionHandler(EmptyRepositoryException.class)
 	public ResponseEntity<String> gereEmptyRepositoryException(EmptyRepositoryException ere) {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ere.getMessage());
@@ -54,7 +65,5 @@ public class AnnonceController {
 	public ResponseEntity<String> gereCollegueNonTrouveException(CollegueNonTrouveException cnte) {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(cnte.getMessage());
 	}
-	
-
 
 }
