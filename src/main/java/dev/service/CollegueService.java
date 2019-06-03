@@ -35,7 +35,7 @@ public class CollegueService {
 		List<RoleCollegue> roles = collegue.getRoles();
 		for (RoleCollegue role : roles) {
 			if (role.getRole().equals(Role.ROLE_CHAUFFEUR)) {
-				throw new CollegueDejaChauffeurException();
+				throw new CollegueDejaChauffeurException("Ce collègue est déja un chauffeur");
 			}
 		}
 		roles.add(new RoleCollegue(collegue, Role.ROLE_CHAUFFEUR));

@@ -11,8 +11,10 @@ public class ReservationChauffeurDTO {
 	private LocalDateTime dateFin;
 	private String nomChauffeur;
 	private String prenomChauffeur;
+	private String telephone;
 	private long idChauffeur;
 	private Boolean avecChauffeur;
+	private String immatriculation;
 
 	public ReservationChauffeurDTO(Reservation reservation) {
 		this.id = reservation.getId();
@@ -20,8 +22,11 @@ public class ReservationChauffeurDTO {
 		this.dateFin = reservation.getDateDeRetour();
 		this.nomChauffeur = reservation.getUnChauffeur().getNom();
 		this.prenomChauffeur = reservation.getUnChauffeur().getPrenom();
+		this.telephone = reservation.getUnChauffeur().getTelephone();
 		this.avecChauffeur = reservation.isAvecOuSansChauffeur();
 		this.idChauffeur = reservation.getUnChauffeur().getId();
+		this.immatriculation = reservation.getUneVoiture().getImmatriculation();
+
 	}
 
 	public ReservationChauffeurDTO(Reservation reservation, String nom, String prenom) {
@@ -129,5 +134,33 @@ public class ReservationChauffeurDTO {
 	 */
 	public void setIdChauffeur(long idChauffeur) {
 		this.idChauffeur = idChauffeur;
+	}
+
+	/**
+	 * @return the telephone
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/**
+	 * @param telephone the telephone to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	/**
+	 * @return the immatriculation
+	 */
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
+	/**
+	 * @param immatriculation the immatriculation to set
+	 */
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
 	}
 }
