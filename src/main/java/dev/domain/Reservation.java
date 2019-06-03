@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Reservation")
@@ -30,7 +31,15 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "id_chauffeur")
 	private Collegue unChauffeur;
+	
+	
+	private boolean avecOuSansChauffeur;
+	
+	public Reservation() {
+		super();
 
+	}
+	
 	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture,
 			Collegue unChauffeur, boolean avecOuSansChauffeur) {
 		super();
@@ -41,38 +50,12 @@ public class Reservation {
 		this.avecOuSansChauffeur = avecOuSansChauffeur;
 	}
 
-	private boolean avecOuSansChauffeur;
-
-	public boolean isAvecOuSansChauffeur() {
-		return avecOuSansChauffeur;
-	}
-
-	public void setAvecOuSansChauffeur(boolean avecOuSansChauffeur) {
-		this.avecOuSansChauffeur = avecOuSansChauffeur;
-	}
-
-	public Collegue getUnChauffeur() {
-		return unChauffeur;
-	}
-
-	public void setUnChauffeur(Collegue unChauffeur) {
-		this.unChauffeur = unChauffeur;
-	}
-
-	private String vehiculeImmatriculation;
-
-	public Reservation() {
-		super();
-
-	}
-
 	public Reservation(int id, LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
 		super();
 		this.id = id;
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
-		this.vehiculeImmatriculation = uneVoiture.getImmatriculation();
 	}
 
 	public Reservation(LocalDateTime dateDeReservation, LocalDateTime dateDeRetour, Vehicule uneVoiture) {
@@ -80,7 +63,6 @@ public class Reservation {
 		this.dateDeReservation = dateDeReservation;
 		this.dateDeRetour = dateDeRetour;
 		this.uneVoiture = uneVoiture;
-		this.vehiculeImmatriculation = uneVoiture.getImmatriculation();
 	}
 
 	public Vehicule getUneVoiture() {
@@ -114,13 +96,20 @@ public class Reservation {
 	public void setDateDeRetour(LocalDateTime dateDeRetour) {
 		this.dateDeRetour = dateDeRetour;
 	}
-
-	public String getVehiculeImmatriculation() {
-		return vehiculeImmatriculation;
+	
+	public boolean isAvecOuSansChauffeur() {
+		return avecOuSansChauffeur;
 	}
 
-	public void setVehiculeImmatriculation(String vehiculeImmatriculation) {
-		this.vehiculeImmatriculation = vehiculeImmatriculation;
+	public void setAvecOuSansChauffeur(boolean avecOuSansChauffeur) {
+		this.avecOuSansChauffeur = avecOuSansChauffeur;
 	}
 
+	public Collegue getUnChauffeur() {
+		return unChauffeur;
+	}
+
+	public void setUnChauffeur(Collegue unChauffeur) {
+		this.unChauffeur = unChauffeur;
+	}
 }

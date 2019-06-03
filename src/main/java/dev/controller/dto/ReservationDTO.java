@@ -35,7 +35,6 @@ public class ReservationDTO {
 		this.uneVoiture.setPhotoUrl(reservation.getUneVoiture().getPhotoUrl());
 		this.uneVoiture.setCategorie(reservation.getUneVoiture().getCategorie());
 		this.uneVoiture.setStatutVehicule(reservation.getUneVoiture().getStatutVehicule());
-
 	}
 
 	public ReservationDTO() {

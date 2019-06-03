@@ -94,7 +94,7 @@ public class ReservationService {
 			throws EmptyRepositoryException {
 
 		List<ReservationDTO> listeResasDTO = new ArrayList<>();
-		List<Reservation> listeResas = reservationRepo.findByVehiculeImmatriculation(immatriculation);
+		List<Reservation> listeResas = reservationRepo.findByUneVoitureImmatriculation(immatriculation);
 
 		if (listeResas.isEmpty()) {
 			throw new EmptyRepositoryException("Aucune réservation enregistrée pour ce véhicule");

@@ -8,6 +8,6 @@ import dev.domain.Reservation;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-	List<Reservation> findByVehiculeImmatriculation(String immatriculation);
+	List<Reservation> findByUneVoitureImmatriculation(String immatriculation);
 
 }
